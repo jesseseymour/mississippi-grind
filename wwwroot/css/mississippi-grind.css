@@ -1,0 +1,11 @@
+body {
+  background: transparent url(../images/bg.jpg) no-repeat center center fixed;
+  background-size: cover; }
+
+@media (min-width: 992px) {
+  .container {
+    width: 100%; } }
+
+
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IkFBQUEsSUFBSTtFQUNILFVBQVUsRUFBRSwrREFBK0Q7RUFDM0UsZUFBZSxFQUFFLEtBQUs7O0FBR3RCLHlCQUF5QjtFQUQxQixVQUFVO0lBRVIsS0FBSyxFQUFFLElBQUkiLCJzb3VyY2VzIjpbIm1pc3Npc3NpcHBpLWdyaW5kLnNjc3MiXSwibmFtZXMiOltdLCJmaWxlIjoibWlzc2lzc2lwcGktZ3JpbmQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keXtcblx0YmFja2dyb3VuZDogdHJhbnNwYXJlbnQgdXJsKC4uL2ltYWdlcy9iZy5qcGcpIG5vLXJlcGVhdCBjZW50ZXIgY2VudGVyIGZpeGVkO1xuXHRiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xufVxuLmNvbnRhaW5lcntcblx0QG1lZGlhIChtaW4td2lkdGg6IDk5MnB4KXtcblx0XHR3aWR0aDogMTAwJTtcblx0fVxufSJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ== */

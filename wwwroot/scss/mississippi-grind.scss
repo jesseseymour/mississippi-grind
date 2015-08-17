@@ -1,0 +1,9 @@
+body{
+	background: transparent url(../images/bg.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+.container{
+	@media (min-width: 992px){
+		width: 100%;
+	}
+}
