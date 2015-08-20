@@ -1,14 +1,138 @@
 {"states":[
-	{"state":"Missouri", "abbrev":"MO", "pins":[
-		{
-			"x":100, 
-			"y":100,
-			"name":"River City Casino",
-			"address":"777 River City Casino Blvd.",
-			"city":"St. Louis",
-			"zip":"63125",
-			"images":["images/image1.jpg","images/image2.jpg"],
-			"ytid":"dQw4w9WgXcQ"
-		}
-	]}
+	{
+		"state":"Iowa", 
+		"abbrev":"IA",
+		"img":"iowa.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	},
+	{
+		"state":"Illinois", 
+		"abbrev":"IL",
+		"img":"illinois.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	},
+	{
+		"state":"Missouri", 
+		"abbrev":"MO",
+		"img":"missouri.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	},
+	{
+		"state":"Kentucky", 
+		"abbrev":"KY",
+		"img":"kentucky.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	},
+	{
+		"state":"Tennessee", 
+		"abbrev":"TN",
+		"img":"tennessee.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	},
+	{
+		"state":"Arkansas", 
+		"abbrev":"AR",
+		"img":"arkansas.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	},
+	{
+		"state":"Mississippi", 
+		"abbrev":"MS",
+		"img":"mississippi.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	},
+	{
+		"state":"Louisiana", 
+		"abbrev":"LA",
+		"img":"louisiana.png",
+		"pins":[
+			{
+				"x":100, 
+				"y":100,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			}
+		]
+	}
 ]}

@@ -1,9 +1,93 @@
+html{
+	width: 100%;
+	height: 100%;
+}
 body{
 	background: transparent url(../images/bg.jpg) no-repeat center center fixed;
 	background-size: cover;
+	width: 100%;
+	height: 100%;
 }
 .container{
+	width: 100%;
+	height: 100%;
+	padding: 0;
 	@media (min-width: 992px){
 		width: 100%;
 	}
 }
+.states{
+	width: 50.642857142857%;
+	max-width: 709px;
+	height: auto;
+	position: relative;
+}
+.state{
+	position:absolute;
+	transform: scale(0,0);
+	img{
+		width: 100%;
+	}
+}
+#IA{
+	top: 0%;
+	left: 0%;
+	width: 41.043723554302%;
+	height: 22.649006622517%;
+}
+#IL{
+	top: 5.55629139%;
+	left: 33.568406205924%;
+	width: 25.952045133992%;
+	height: 39.602649006623%;
+}
+#MO{
+	top:20.794701986755%;
+	left: 6.346967559944%;
+	width: 44.428772919605%;
+	height: 32.317880794702%;
+}
+#KY{
+	top: 27.682119205298%;
+	left: 47.954866008463%;
+	width: 49.083215796897%;
+	height: 21.854304635762%;
+}
+#TN{
+	top: 45.165562913907%;
+	left: 44.428772919605%;
+	width: 55.571227080395%;
+	height: 16.026490066225%;
+}
+#AR{
+	top: 49.801324503311%;
+	left: 16.643159379408%;
+	width: 30.324400564175%;
+	height: 25.562913907285%;
+}
+#MS{
+	top: 60.397350993377%;
+	left: 37.517630465444%;
+	width: 18.758815232722%;
+	height: 30.993377483444%;
+}
+#LA{
+	top: 74.304635761589%;
+	left: 22.143864598025%;
+	width: 31.593794076164%;
+	height: 25.695364238411%;
+}
+.river{
+	position: absolute;
+	top: -9.9%;
+	left: 21%;
+	width: 33.991537376587%;
+	//height: 108.476821192053%;
+	height: 0;
+	overflow:hidden;
+	img{
+		width: 100%;
+	}
+}
+
+
