@@ -17,17 +17,32 @@ body{
 	}
 }
 .states{
-	width: 50.642857142857%;
-	max-width: 709px;
-	height: auto;
+	//width: 50.642857142857%;
+	//max-width: 709px;
+	//height: auto;
+	height: 80%;
+	max-height: 755px;
+	width: auto;
 	position: relative;
+	&.alt{
+		width: 50.642857142857%;
+		max-width: 709px;
+		max-height: none;
+		height: auto;
+	}
 }
 .state{
 	position:absolute;
-	transform: scale(0,0);
+	//transform: scale(0,0);
 	img{
 		width: 100%;
 	}
+}
+.pin{
+	width: 35px;
+	height: 62px;
+	background: transparent url(/images/pin-blue.png) no-repeat left top;
+	position: absolute;
 }
 #IA{
 	top: 0%;

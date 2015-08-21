@@ -5,8 +5,8 @@
 		"img":"iowa.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":0, 
+				"y":0,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
@@ -22,8 +22,8 @@
 		"img":"illinois.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":30, 
+				"y":30,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
@@ -39,8 +39,8 @@
 		"img":"missouri.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":30, 
+				"y":30,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
@@ -56,8 +56,8 @@
 		"img":"kentucky.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":30, 
+				"y":30,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
@@ -73,8 +73,8 @@
 		"img":"tennessee.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":30, 
+				"y":30,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
@@ -90,8 +90,8 @@
 		"img":"arkansas.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":30, 
+				"y":30,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
@@ -107,8 +107,8 @@
 		"img":"mississippi.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":30, 
+				"y":30,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
@@ -124,8 +124,8 @@
 		"img":"louisiana.png",
 		"pins":[
 			{
-				"x":100, 
-				"y":100,
+				"x":30, 
+				"y":30,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",

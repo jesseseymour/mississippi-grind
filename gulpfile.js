@@ -27,6 +27,7 @@ gulp.task('serve', ['sass'], function() {
 
 	gulp.watch('wwwroot/**/*.scss', ['sass']);
 	gulp.watch('wwwroot/**/*.html').on('change', reload);
+	gulp.watch('wwwroot/**/*.js').on('change', reload);
 });
 
 gulp.task('imagemin', function() {
