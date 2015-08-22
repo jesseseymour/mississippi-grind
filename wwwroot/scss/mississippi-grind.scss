@@ -8,6 +8,16 @@ body{
 	width: 100%;
 	height: 100%;
 }
+.scaling-svg-container{
+	width: 45%;
+	overflow: visible;
+	position: absolute;
+	left: 30%;
+	height: auto;
+	.scaling-svg{
+		overflow:visible;
+	}
+}
 .container{
 	width: 100%;
 	height: 100%;
@@ -32,11 +42,8 @@ body{
 	}
 }
 .state{
-	position:absolute;
-	//transform: scale(0,0);
-	img{
-		width: 100%;
-	}
+	opacity: 0.75;
+	position: absolute;
 }
 .pin{
 	width: 35px;
@@ -45,16 +52,17 @@ body{
 	position: absolute;
 }
 #IA{
-	top: 0%;
-	left: 0%;
-	width: 41.043723554302%;
-	height: 22.649006622517%;
+	//top: 0%;
+	//left: 0%;
+	//width: 41.043723554302%;
+	//height: 22.649006622517%;
+	//opacity: 0.75;
 }
 #IL{
-	top: 5.55629139%;
-	left: 33.568406205924%;
-	width: 25.952045133992%;
-	height: 39.602649006623%;
+	// top: 5.55629139%;
+	// left: 33.568406205924%;
+	// width: 25.952045133992%;
+	// height: 39.602649006623%;
 }
 #MO{
 	top:20.794701986755%;

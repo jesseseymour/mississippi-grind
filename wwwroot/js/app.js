@@ -5,12 +5,19 @@
 	var t = new TimelineLite();
 
 	var init = function(){
-		
-		resize();
-		loadStates();
-		$(d).on('click','.state > svg',function(){
-			selectState($(this).parent());
+		$('svg path').on('click',function(){
+			var stateName = $(this).attr('id');
+			selectState($("#" + stateName));
+
 		})
+
+		//set states to scale 0 and transformOrigin to center
+		TweenMax.set($('.state'),{transformOrigin: "50% 50% 0"});
+		//TweenMax.to($('.state'),0,{scale:0});
+		//startAnimation();
+
+		// resize();
+		loadStates();
 	}();
 
 	function loadStates(){
@@ -24,7 +31,7 @@
 				setPins(state,element);
 			})
 			
-			//startAnimation();
+			startAnimation();
 		})
 	}
 
@@ -44,7 +51,7 @@
 
 	function startAnimation() {
 		//animate in states
-		tl.staggerTo(stateArray, .8, {scale:1, ease: Back.easeOut}, 0.2);
+		//tl.staggerTo(stateArray, .8, {scale:1, ease: Back.easeOut}, 0.2);
 
 		//river
 		tl.to($('.river'), 4.0, {height:'108%'})
@@ -53,21 +60,32 @@
 	function selectState(state){
 		if (!selected){
 			state.attr('data-active','1');
-			t = new TimelineLite;
-			t.to(state,1,{scale:1.5,top:'50%',left:'50%'});
-			$('.state').each(function(){
-				if ($(this).attr('data-active') == 0){
-					TweenMax.to($(this),.5,{scale:0, ease: Back.easeIn});
+			t = new TimelineLite({
+				onComplete:function(){
+					var offset = state.offset();
+					//console.log(offset);
 				}
 			});
+			
+			state.css({
+				'z-index':100
+			});
+			$('.state').each(function(){
+				
+				if ($(this).attr('data-active') == 0){
+					$(this).css({
+						'z-index':10
+					});
+					t.to($(this),.5,{scale:0, ease: Back.easeIn}, 0);
+				}
+			});
+			var x = state.attr('data-x');
+			var y = state.attr('data-y');
+			var scale = state.attr('data-scale');
+			t.to(state,.5,{scale:scale,xPercent:x,yPercent:y, svgOrigin: "0 0"});
 			selected = true;
 		} else {
 			t.reverse();
-			$('.state').each(function(){
-				if ($(this).attr('data-active') == 0){
-					TweenMax.to($(this),.5,{scale:1, ease: Back.easeOut});
-				}
-			});
 			state.attr('data-active','0');
 			selected = false;
 		}
