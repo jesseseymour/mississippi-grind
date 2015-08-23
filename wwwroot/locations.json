@@ -12,7 +12,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			},
 			{
 				"x":0.69, 
@@ -22,7 +23,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"red"
 			}
 		]
 	},
@@ -39,7 +41,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			}
 		]
 	},
@@ -56,7 +59,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			}
 		]
 	},
@@ -73,7 +77,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			}
 		]
 	},
@@ -90,7 +95,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			}
 		]
 	},
@@ -107,7 +113,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			}
 		]
 	},
@@ -124,7 +131,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			}
 		]
 	},
@@ -141,7 +149,8 @@
 				"city":"St. Louis",
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
-				"ytid":"dQw4w9WgXcQ"
+				"ytid":"dQw4w9WgXcQ",
+				"color":"blue"
 			}
 		]
 	}

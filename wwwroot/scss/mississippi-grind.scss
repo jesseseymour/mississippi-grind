@@ -37,8 +37,8 @@ body{
 }
 .stateOverlay{
 	position:absolute;
-	left:0;
-	top:0;
+	left:-1000px;
+	top:-1000px;
 	opacity: 0;
 	height:auto;
 }
@@ -62,13 +62,16 @@ body{
 	position: absolute;
 }
 .pin{
-	width: 35px;
-	height: 62px;
-	background: transparent url(/images/pin-blue.png) no-repeat left top;
+	width: 40px;
+	height: 64px;
+	background: transparent url(/images/pin.png) no-repeat left top;
 	position: absolute;
 	left: -1000px;
 	top: -1000px;
-	//display:none;
+	overflow: hidden;
+	&.red{
+		background-position: right top;
+	}
 }
 #IA{
 	//top: 0%;

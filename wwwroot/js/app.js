@@ -77,23 +77,37 @@
 					'left':offset.left,
 					'top':offset.top,
 					'width':width,
-					'opacity':1
+					'opacity':0
 				});
-			TweenLite.to(state,0,{opacity:0});
+			
 
 			//return;
 			selected = true;
 			t = new TimelineLite({
 				onComplete:function(){
-					//loop through state data object to find correct set of location pins
-					for (i = 0; i < stateData.states.length; i++){
-						if (state.attr('id') == stateData.states[i].abbrev){
-							currentState.pins = stateData.states[i].pins;
-							positionPins();//position current states pins
-							dropPins();
-							return;
+					var x = state.attr('data-x') + "%";
+					var y = state.attr('data-y') + "%";
+					var scale = state.attr('data-scale');
+
+					//here i hot swap the svg path with the new svg img
+					//when the animation is ready, in order to prevent any jumpy behavior
+					overlay.css('opacity',1);
+					state.css('opacity',0);
+
+					//now the state overlay img is animated into place
+					//and once complete, we determine where the pins should animate to
+					TweenMax.to(overlay,.2,{width:scale + "%",left:x,top:y, svgOrigin: "0 0",onComplete:function(){
+						//loop through state data object to find correct set of location pins
+						for (i = 0; i < stateData.states.length; i++){
+							if (state.attr('id') == stateData.states[i].abbrev){
+								currentState.pins = stateData.states[i].pins;
+								positionPins();//position current states pins
+								dropPins();//animate pins in to place
+								return;
+							}
 						}
-					}
+					}});
+					
 
 				},
 				onReverseComplete:function(){
@@ -108,14 +122,11 @@
 			$('.state').each(function(){
 				if ($(this).attr('data-active') == 0){
 					$(this).css('z-index',10);
-					//t.to($(this),.3,{scale:0, ease: Back.easeIn}, 0);
+					t.to($(this),.3,{scale:0, ease: Back.easeIn}, 0);
 				}
 			});
 
-			var x = state.attr('data-x') + "%";
-			var y = state.attr('data-y') + "%";
-			var scale = state.attr('data-scale');
-			t.to(overlay,.2,{scale:scale,left:x,top:y, svgOrigin: "0 0"});
+			
 			
 		} else {
 			
@@ -133,7 +144,14 @@
 		$.each($('.pin_' + currentState.state), function(){
 			pinTl.to($(this),.5,{top:-100},0)
 		})
-		t.reverse();
+		var path = document.getElementById(currentState.state);
+		var width = path.getBoundingClientRect().width;
+		var height = path.getBoundingClientRect().height;
+		var offset = $("#" + currentState.state).offset();
+		TweenMax.to(overlay,.2,{width:width,left:offset.left,top:offset.top,onComplete:function(){
+			t.reverse();
+		}});
+		
 		$("#" + currentState.state).attr('data-active','0');
 
 		selected = false;
@@ -150,6 +168,9 @@
 					'data-x':$(this)[0].x,
 					'data-y':$(this)[0].y
 					});
+			if($(this)[0].color === "red"){
+				pin.addClass("red");
+			}
 			$('.container').append(pin);
 			counter++;
 		})
@@ -160,8 +181,6 @@
 		var width = path.getBoundingClientRect().width;
 		var height = path.getBoundingClientRect().height;
 		var offset = overlay.offset();
-
-		console.log(width);
 
 		$.each($('.pin_' + currentState.state), function(){
 			var percX = width * $(this).attr('data-x');
@@ -195,7 +214,7 @@
 		if(selected){
 			positionPins();
 		}
-		console.log($(window).width());
+		//console.log($(window).width());
 	}
 
 	
