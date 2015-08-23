@@ -1,16 +1,17 @@
 (function ($, w, d){
-	var stateArray = [];
-	var selected = false;
+	var stateArray = [],
+	stateData,
+	selected = false;
 	var tl = new TimelineLite();
 	var t = new TimelineLite();
 
 	var init = function(){
 		$('svg path').on('click',function(){
 			var stateName = $(this).attr('id');
-			selectState($("#" + stateName));
-
+			//selectState($("#" + stateName));
+			alert(document.getElementById(stateName).getBoundingClientRect().width);
 		})
-
+		console.log(document.getElementById("IA"));
 		//set states to scale 0 and transformOrigin to center
 		TweenMax.set($('.state'),{transformOrigin: "50% 50% 0"});
 		//TweenMax.to($('.state'),0,{scale:0});
@@ -22,13 +23,14 @@
 
 	function loadStates(){
 		$.getJSON("../locations.json", function(data){
+			stateData = data;
 			$.each(data.states, function(){
 				//console.log($(this)[0].state);
 				var state = $(this)[0];
 				var id = "#" + state.abbrev;
 				var element = $(id);
 				stateArray.push(element);
-				setPins(state,element);
+				//setPins(state,element);
 			})
 			
 			startAnimation();
@@ -63,7 +65,25 @@
 			t = new TimelineLite({
 				onComplete:function(){
 					var offset = state.offset();
-					//console.log(offset);
+					var pins;
+					console.log(state.getBoundingClientRect());
+					//set pins
+					for (i = 0; i < stateData.states.length; i++){
+						if (state.attr('id') == stateData.states[i].abbrev){
+							pins = stateData.states[i].pins;
+							$.each(pins,function(){
+								console.log($(this)[0].x);
+								var pin = $('.pin').clone().appendTo('.svgContainer').css({
+									'left':$(this)[0].x + "%",
+									'top':$(this)[0].y + "%"
+								});
+								
+							})
+							return;
+						}
+					}
+					
+					
 				}
 			});
 			
