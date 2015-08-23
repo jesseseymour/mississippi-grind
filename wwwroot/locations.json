@@ -5,8 +5,18 @@
 		"img":"iowa.png",
 		"pins":[
 			{
-				"x":0, 
-				"y":0,
+				"x":0.72, 
+				"y":0.41,
+				"name":"River City Casino",
+				"address":"777 River City Casino Blvd.",
+				"city":"St. Louis",
+				"zip":"63125",
+				"images":["images/image1.jpg","images/image2.jpg"],
+				"ytid":"dQw4w9WgXcQ"
+			},
+			{
+				"x":0.69, 
+				"y":0.81,
 				"name":"River City Casino",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
