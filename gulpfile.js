@@ -3,11 +3,7 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	filter = require('gulp-filter'),
 	browserSync = require('browser-sync').create(),
-	reload = browserSync.reload,
-	uglify = require('gulp-uglify'),
-	minifyCss = require('gulp-minify-css'),
-	imagemin	= require('gulp-imagemin'),
-	pngquant	= require('imagemin-pngquant');
+	reload = browserSync.reload;
 	
 
 gulp.task('sass', function() {

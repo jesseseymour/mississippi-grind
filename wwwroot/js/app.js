@@ -5,6 +5,7 @@
 	selected = false;
 	var tl = new TimelineLite();
 	var t = new TimelineLite();
+	var pinTl;
 
 	var init = function(){
 		$('svg path').on('click',function(){
@@ -18,7 +19,7 @@
 
 		// resize();
 		loadStates();
-	}();
+	};
 
 	function loadStates(){
 		$.getJSON("../locations.json", function(data){
@@ -29,7 +30,7 @@
 				var id = "#" + state.abbrev;
 				var element = $(id);
 				stateArray.push(element);
-				//setPins(state,element);
+				createPins(state);
 			})
 			
 			startAnimation();
@@ -52,74 +53,80 @@
 			currentState.state = state.attr('id');
 			t = new TimelineLite({
 				onComplete:function(){
-					var offset = state.offset();
-					//var pins;
-					//console.log(state.getBoundingClientRect());
 					//set pins
 					for (i = 0; i < stateData.states.length; i++){
 						if (state.attr('id') == stateData.states[i].abbrev){
 							currentState.pins = stateData.states[i].pins;
-							createPins(); //place pins on selected state
+							positionPins();//position current states pins
+							dropPins();
 							return;
 						}
 					}
-					
-					
+
 				}
 			});
-			
-			state.css({
-				'z-index':100
-			});
+			state.css('z-index',100);
 			$('.state').each(function(){
-				
 				if ($(this).attr('data-active') == 0){
-					$(this).css({
-						'z-index':10
-					});
+					$(this).css('z-index',10);
 					t.to($(this),.5,{scale:0, ease: Back.easeIn}, 0);
 				}
 			});
+
 			var x = state.attr('data-x');
 			var y = state.attr('data-y');
 			var scale = state.attr('data-scale');
 			t.to(state,.5,{scale:scale,xPercent:x,yPercent:y, svgOrigin: "0 0"});
 			
 		} else {
+			pinTl = new TimelineLite({onComplete:
+				function(){
+					this.clear();
+					$('.pin').css('opacity',0);
+				}
+			});
+			$.each($('.pin_' + currentState.state), function(){
+				pinTl.to($(this),.5,{top:-100},0)
+			})
 			t.reverse();
 			state.attr('data-active','0');
 			selected = false;
 		}
-
-		//console.log("click");
 	}
 
-	function createPins(){
-		var pins = currentState.pins;
+	function createPins(state){
 		var counter = 0;
+		var pins = state.pins;
 		$.each(pins, function(){
 			var pin = $("<div>")
-				.addClass('pin pin_' + currentState.state)
+				.addClass('pin pin_' + state.abbrev)
 				.attr({
 					'data-pinid':counter,
 					'data-x':$(this)[0].x,
 					'data-y':$(this)[0].y
-					})
-				.css({
-					'left':0,
-					'top':0
-				});
+					});
 			$('.container').append(pin);
 			counter++;
 		})
-		setPins();
 	}
 
-	function setPins(){
+	function positionPins(){
 		var path = document.getElementById(currentState.state);
 		var width = path.getBoundingClientRect().width;
 		var height = path.getBoundingClientRect().height;
 		var offset = $("#" + currentState.state).offset();
+		
+		var childrenPos = document.getElementById('IA').getBoundingClientRect();
+		var parentPos = document.getElementById('svgMap').getBoundingClientRect();
+		var relativePos = {};
+
+		relativePos.top = childrenPos.top - parentPos.top,
+		relativePos.right = childrenPos.right - parentPos.right,
+		relativePos.bottom = childrenPos.bottom - parentPos.bottom,
+		relativePos.left = childrenPos.left - parentPos.left;
+
+		console.log(relativePos);
+
 		$.each($('.pin_' + currentState.state), function(){
 			var percX = width * $(this).attr('data-x');
 			var percY = height * $(this).attr('data-y');
@@ -133,6 +140,13 @@
 		})
 	}
 
+	function dropPins(){ //drop pins onto map
+		pinTl = new TimelineLite({onComplete:function(){this.clear();}});
+		$.each($('.pin_' + currentState.state), function(){
+			pinTl.from($(this),.5,{top:-100},.3).to($(this),.5,{alpha:1},0)
+		})
+	}
+
 	function resize() {
 		var s = $('.states');
 		var maxHeight = 755;
@@ -143,7 +157,7 @@
 		var ratio = maxWidth / maxHeight;
 		s.width(currH * ratio);
 		if(selected){
-			setPins();
+			positionPins();
 		}
 	}
 
@@ -151,4 +165,6 @@
 	w.onresize = function(){
 		resize();
 	}
+
+	$(window).load(init());
 }(jQuery, window, document));

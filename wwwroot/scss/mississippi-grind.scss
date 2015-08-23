@@ -8,6 +8,15 @@ body{
 	width: 100%;
 	height: 100%;
 }
+#test{
+	position:absolute;
+	width:100px;
+	height: 100px;
+	background: green;
+	top: 300px;
+	left: 200px;
+	z-index: 10000;
+}
 .scaling-svg-container{
 	width: 45%;
 	overflow: visible;
@@ -50,6 +59,9 @@ body{
 	height: 62px;
 	background: transparent url(/images/pin-blue.png) no-repeat left top;
 	position: absolute;
+	left: -1000px;
+	top: -1000px;
+	//display:none;
 }
 #IA{
 	//top: 0%;
