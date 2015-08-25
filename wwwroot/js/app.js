@@ -3,6 +3,7 @@
 	stateData,
 	currentState = {},
 	overlay,
+	details = false,
 	selected = false;
 	var tl = new TimelineLite();
 	var t = new TimelineLite();
@@ -14,8 +15,10 @@
 			selectState($("#" + stateName));
 		})
 
-		$(d).on('click','.stateOverlay',resetMap);
+		$(d).on('click','.backToMap',resetMap);
+		$(d).on('click','.pin',getPinDetails);
 		//console.log(document.getElementById("IA").getBoundingClientRect());
+
 		//set states to scale 0 and transformOrigin to center
 		TweenMax.set($('.state'),{transformOrigin: "50% 50% 0"});
 		//TweenMax.to($('.state'),0,{scale:0});
@@ -28,13 +31,20 @@
 	function loadStates(){
 		$.getJSON("../locations.json", function(data){
 			stateData = data;
+			var i = 0;
 			$.each(data.states, function(){
 				//console.log($(this)[0].state);
 				var state = $(this)[0];
 				var id = "#" + state.abbrev;
 				var element = $(id);
 				stateArray.push(element);
-				createPins(state);
+
+				//remove template div after all states are looped and all panels are created
+				var created = createPins(state);
+				if (created && i == data.states.length - 1){
+					$("#detailPanelTemplate").remove();
+				}
+				i++;
 			})
 			
 			startAnimation();
@@ -153,18 +163,22 @@
 		}});
 		
 		$("#" + currentState.state).attr('data-active','0');
-
+		TweenLite.to($('#details'),.5,{right:'-100%'});
 		selected = false;
+		details = false;
 	}
 
 	function createPins(state){
 		var counter = 0;
 		var pins = state.pins;
 		$.each(pins, function(){
+			//create the actual pin element that will show on the map
+			var data = $(this)[0];
 			var pin = $("<div>")
 				.addClass('pin pin_' + state.abbrev)
 				.attr({
 					'data-pinid':counter,
+					'data-state':state.abbrev,
 					'data-x':$(this)[0].x,
 					'data-y':$(this)[0].y
 					});
@@ -172,8 +186,26 @@
 				pin.addClass("red");
 			}
 			$('.container').append(pin);
+
+			//clone content container and popuplate with json data
+			var $elem = $("#detailPanelTemplate")
+				.clone( true )
+				.attr({
+					'id':'panel_' + state.abbrev + '_' + counter,
+					'data-state':state.abbrev,
+					'data-id': counter
+				});
+			$('.city',$elem).text(data.city + ', ' + state.state);
+			$('.a1',$elem).text(data.name);
+			$('.a2',$elem).text(data.address);
+			$('.a3',$elem).text(data.city + ', ' + state.abbrev + ', ' + data.zip);
+			$('.video',$elem).attr('data-ytid',data.ytid);
+			$('.photo',$elem).attr('data-img',data.images[0]);
+			$('.thumb',$elem).html('<img src="/images/thumbs/' + data.thumb + '" />');
+			$("#details").append($elem);
 			counter++;
 		})
+		return true;
 	}
 
 	function positionPins(){
@@ -200,6 +232,34 @@
 		$.each($('.pin_' + currentState.state), function(){
 			pinTl.from($(this),.5,{top:-100},.3).to($(this),.5,{alpha:1},0)
 		})
+	}
+
+	function getPinDetails(){
+		var pin = $(this);
+		var state = pin.attr('data-state');
+		var id = pin.attr('data-pinid');
+		var panel = $('#panel_' + state + '_' + id);
+		
+		if (details){
+			TweenLite.to($('#details'),.5,{right:'-100%',onComplete:function(){
+				showDetailsPanel(panel);
+			}});
+			
+		}else{
+			showDetailsPanel(panel);
+		}
+		
+		details = true;
+	}
+
+	function showDetailsPanel(panel){
+		hideAllDetails();
+		panel.css('visibility','visible');
+		TweenLite.to($('#details'),.5,{right:'3%'});
+	}
+
+	function hideAllDetails(){
+		$('.panel').css('visibility','hidden');
 	}
 
 	function resize() {

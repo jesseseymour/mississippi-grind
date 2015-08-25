@@ -7,24 +7,26 @@
 			{
 				"x":0.72, 
 				"y":0.41,
-				"name":"River City Casino",
+				"name":"pin 1",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
 				"zip":"63125",
-				"images":["images/image1.jpg","images/image2.jpg"],
+				"images":["images/locations/river-city-casino.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			},
 			{
 				"x":0.69, 
 				"y":0.81,
-				"name":"River City Casino",
+				"name":"pin 2",
 				"address":"777 River City Casino Blvd.",
 				"city":"St. Louis",
 				"zip":"63125",
-				"images":["images/image1.jpg","images/image2.jpg"],
+				"images":["images/locations/river-city-casino.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"red"
+				"color":"red",
+				"thumb":"IA.jpg"
 			}
 		]
 	},
@@ -42,7 +44,8 @@
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			}
 		]
 	},
@@ -60,7 +63,8 @@
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			}
 		]
 	},
@@ -78,7 +82,8 @@
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			}
 		]
 	},
@@ -96,7 +101,8 @@
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			}
 		]
 	},
@@ -114,7 +120,8 @@
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			}
 		]
 	},
@@ -132,7 +139,8 @@
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			}
 		]
 	},
@@ -150,7 +158,8 @@
 				"zip":"63125",
 				"images":["images/image1.jpg","images/image2.jpg"],
 				"ytid":"dQw4w9WgXcQ",
-				"color":"blue"
+				"color":"blue",
+				"thumb":"IA.jpg"
 			}
 		]
 	}
