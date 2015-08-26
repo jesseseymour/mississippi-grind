@@ -60,7 +60,12 @@ body{
 	}
 }
 .state{
-	opacity: 0.75;
+	path{
+		opacity: 0.75;
+		&.letter{
+			opacity:1;
+		}
+	}
 	position: absolute;
 }
 .pin{

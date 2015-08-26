@@ -22,8 +22,8 @@
 
 		//set states to scale 0 and transformOrigin to center
 		TweenMax.set($('.state'),{transformOrigin: "50% 50% 0"});
-		//TweenMax.to($('.state'),0,{scale:0});
-		//startAnimation();
+		TweenMax.to($('.state'),0,{scale:0});
+		startAnimation();
 
 		// resize();
 		loadStates();
@@ -54,7 +54,7 @@
 
 	function startAnimation() {
 		//animate in states
-		//tl.staggerTo(stateArray, .8, {scale:1, ease: Back.easeOut}, 0.2);
+		tl.staggerTo(stateArray, .8, {scale:1, ease: Back.easeOut}, 0.2);
 
 		//river
 		//tl.to($('.river'), 4.0, {height:'108%'})
