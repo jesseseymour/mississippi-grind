@@ -27,7 +27,7 @@
 
 		// resize();
 		loadStates();
-	}();
+	};
 
 	function loadStates(){
 		$.getJSON("../locations.json", function(data){
@@ -54,6 +54,8 @@
 
 	function startAnimation() {
 		//animate in states
+
+		tl.fromTo($('.dice > img'), 2,{scale:0, rotation:-90},{scale:1,rotation:0, ease:Power3.easeOut},0);
 		tl.staggerTo(stateArray, .8, {scale:1, ease: Back.easeOut}, 0.2);
 
 		//river
@@ -289,4 +291,6 @@
 	}
 
 	$.featherlight.defaults.variant = "mg";
+
+	$(d).ready(init);
 }(jQuery, window, document));

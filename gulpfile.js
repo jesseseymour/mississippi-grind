@@ -3,7 +3,11 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	filter = require('gulp-filter'),
 	browserSync = require('browser-sync').create(),
-	reload = browserSync.reload;
+	reload = browserSync.reload,
+	uglify = require('gulp-uglify'),
+	minifyCss = require('gulp-minify-css'),
+	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant');
 	
 
 gulp.task('sass', function() {
@@ -36,15 +40,15 @@ gulp.task('imagemin', function() {
 });
 
 gulp.task('uglify', function() {
-	gulp.src('wwwroot/Scripts/*.js')
+	gulp.src('wwwroot/js/*.js')
 		.pipe(uglify())
-		.pipe(gulp.dest('wwwroot/Scripts'))
+		.pipe(gulp.dest('wwwroot/dist/js'))
 });
 
 gulp.task('minify', function(){
-	gulp.src('wwwroot/scss/framework.css')
+	gulp.src('wwwroot/css/*.css')
 		.pipe(minifyCss())
-		.pipe(gulp.dest('wwwroot/scss'));
+		.pipe(gulp.dest('wwwroot/dist/css'));
 })
 
 gulp.task('default', ['serve']);
