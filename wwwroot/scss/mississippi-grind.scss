@@ -35,6 +35,7 @@ body{
 		width: 100%;
 	}
 	overflow-x: hidden;
+	position: relative;
 }
 .stateOverlay{
 	position:absolute;
@@ -133,6 +134,7 @@ body{
 				>div{
 					display: inline-block;
 					padding-right: 18px;
+					cursor: pointer;
 				}
 			}
 		}
@@ -143,6 +145,14 @@ body{
 			>img{
 				width: 100%;
 			}
+		}
+		.pointer{
+			width: 19px;
+			height: 40px;
+			background: transparent url(/images/left-pointer.png) no-repeat left top;
+			position: absolute;
+			left: -19px;
+			top: 113px;
 		}
 	}
 }
@@ -158,5 +168,36 @@ body{
 		width: 100%;
 	}
 }
+
+//lightbox styles
+.featherlight{
+	&.mg{
+		.featherlight-content{
+			padding: 6px 6px 0;
+			border-bottom-width: 6px;
+			overflow: visible;
+		}
+		&:last-of-type{
+			background: rgba(0,0,0,0.7);
+		}
+		.featherlight-close-icon{
+			color: #f9de82;
+			font-family: serif;
+			font-size: 24px;
+			top: -26px;
+			background: none;
+		}
+		&.featherlight-iframe{
+			.featherlight-content{
+				padding: 6px;
+				border-bottom: 0;
+			}
+		}
+	}
+}
+.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } 
+.embed-container iframe, 
+.embed-container object, 
+.embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 

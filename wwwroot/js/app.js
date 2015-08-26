@@ -17,6 +17,7 @@
 
 		$(d).on('click','.backToMap',resetMap);
 		$(d).on('click','.pin',getPinDetails);
+		$(d).on('click','.video',openVideo);
 		//console.log(document.getElementById("IA").getBoundingClientRect());
 
 		//set states to scale 0 and transformOrigin to center
@@ -200,7 +201,7 @@
 			$('.a2',$elem).text(data.address);
 			$('.a3',$elem).text(data.city + ', ' + state.abbrev + ', ' + data.zip);
 			$('.video',$elem).attr('data-ytid',data.ytid);
-			$('.photo',$elem).attr('data-img',data.images[0]);
+			$('.photo',$elem).attr('data-featherlight',data.images[0]);
 			$('.thumb',$elem).html('<img src="/images/thumbs/' + data.thumb + '" />');
 			$("#details").append($elem);
 			counter++;
@@ -277,10 +278,15 @@
 		//console.log($(window).width());
 	}
 
+	function openVideo(){
+		var ytid = $(this).attr('data-ytid');
+		var content = "<div class='embed-container'><iframe src='http://www.youtube.com/embed/" + ytid + "' frameborder='0' allowfullscreen></iframe></div>";
+		$.featherlight(content);
+	}
 	
 	w.onresize = function(){
 		resize();
 	}
 
-	
+	$.featherlight.defaults.variant = "mg";
 }(jQuery, window, document));
