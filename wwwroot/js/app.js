@@ -10,7 +10,7 @@
 	var pinTl;
 
 	var init = function(){
-		$('svg path').on('click',function(){
+		$('svg .state').on('click',function(){
 			var stateName = $(this).attr('id');
 			selectState($("#" + stateName));
 		})
