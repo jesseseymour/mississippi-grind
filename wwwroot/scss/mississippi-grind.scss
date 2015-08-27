@@ -108,10 +108,11 @@ body{
 		}
 	}
 	position: absolute;
+	cursor: pointer;
 }
 .pin{
 	//width: 25px;
-	width: 2.7%;
+	width: 2.0%;
 	max-width: 42px;
 	//height: 67px;
 	//background: transparent url(/images/pin.png) no-repeat left top;
@@ -276,7 +277,7 @@ body{
 		}
 		.featherlight-close-icon{
 			color: $gold;
-			font-family: serif;
+			@include bmMedium;
 			font-size: 24px;
 			top: -26px;
 			background: none;

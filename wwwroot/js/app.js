@@ -139,7 +139,7 @@
 
 				},
 				onReverseComplete:function(){
-					TweenLite.to(state,0,{opacity:0.75});
+					TweenLite.to(state,0,{opacity:1});
 					overlay.css({
 						left: -1000,
 						top: -1000
@@ -317,6 +317,7 @@
 	}
 
 	$.featherlight.defaults.variant = "mg";
+	$.featherlight.defaults.closeIcon = "X";
 
 	$(d).ready(init);
 }(jQuery, window, document));
