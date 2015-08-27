@@ -105,25 +105,6 @@
 		]
 	},
 	{
-		"state":"Kentucky", 
-		"abbrev":"KY",
-		"img":"kentucky.png",
-		"pins":[
-			{
-				"x":0.5, 
-				"y":0.5,
-				"name":"River City Casino",
-				"address":"777 River City Casino Blvd.",
-				"city":"St. Louis",
-				"zip":"63125",
-				"images":["images/locations/river-city-casino.jpg"],
-				"ytid":"dQw4w9WgXcQ",
-				"color":"blue",
-				"thumb":"IA.jpg"
-			}
-		]
-	},
-	{
 		"state":"Tennessee", 
 		"abbrev":"TN",
 		"img":"tennessee.png",
