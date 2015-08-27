@@ -60,11 +60,12 @@ body{
 	width: 45%;
 	overflow: visible;
 	position: absolute;
-	left: 20%;
+	left: 30%;
 	top: 80px;
 	height: auto;
 	.scaling-svg{
 		overflow:visible;
+		position:relative;
 	}
 }
 .container{
@@ -109,16 +110,22 @@ body{
 	position: absolute;
 }
 .pin{
-	width: 40px;
-	height: 64px;
-	background: transparent url(/images/pin.png) no-repeat left top;
+	//width: 25px;
+	width: 2.7%;
+	max-width: 42px;
+	//height: 67px;
+	//background: transparent url(/images/pin.png) no-repeat left top;
 	position: absolute;
 	left: -1000px;
 	top: -1000px;
 	overflow: hidden;
 	cursor: pointer;
 	&.red{
-		background-position: right top;
+		//background-position: right top;
+	}
+	img{
+		width: 100%;
+		height: auto;
 	}
 }
 #details{

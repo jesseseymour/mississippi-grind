@@ -3,11 +3,11 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	filter = require('gulp-filter'),
 	browserSync = require('browser-sync').create(),
-	reload = browserSync.reload,
+	reload = browserSync.reload;/*,
 	uglify = require('gulp-uglify'),
 	minifyCss = require('gulp-minify-css'),
 	imagemin = require('gulp-imagemin'),
-	pngquant = require('imagemin-pngquant');
+	pngquant = require('imagemin-pngquant');*/
 	
 
 gulp.task('sass', function() {
@@ -27,7 +27,7 @@ gulp.task('serve', ['sass'], function() {
 
 	gulp.watch('wwwroot/**/*.scss', ['sass']);
 	gulp.watch('wwwroot/**/*.html').on('change', reload);
-	gulp.watch('wwwroot/**/*.js').on('change', reload);
+	gulp.watch(['wwwroot/**/*.js','wwwroot/locations.json']).on('change', reload);
 });
 
 gulp.task('imagemin', function() {

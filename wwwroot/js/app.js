@@ -9,11 +9,15 @@
 	var t = new TimelineLite();
 	var pinTl;
 
+	var debug = false;
+
 	var init = function(){
 		$('svg .state').on('click',function(){
 			var stateName = $(this).attr('id');
 			selectState($("#" + stateName));
 		})
+		if(debug)
+			selectState($("#LA"))
 
 		$(d).on('click','.backToMap',resetMap);
 		$(d).on('click','.pin',getPinDetails);
@@ -22,8 +26,9 @@
 
 		//set states to scale 0 and transformOrigin to center
 		TweenMax.set($('.state'),{transformOrigin: "50% 50% 0"});
-		TweenMax.to($('.state'),0,{scale:0});
-		startAnimation();
+		if(!debug)
+			TweenMax.to($('.state'),0,{scale:0});
+		//startAnimation();
 
 		// resize();
 		loadStates();
@@ -48,7 +53,8 @@
 				i++;
 			})
 			
-			startAnimation();
+			if (!debug)
+				startAnimation();
 		})
 	}
 
@@ -98,8 +104,8 @@
 			selected = true;
 			t = new TimelineLite({
 				onComplete:function(){
-					var x = state.attr('data-x') + "%";
-					var y = state.attr('data-y') + "%";
+					var x = state.attr('data-x');
+					var y = state.attr('data-y');
 					var scale = state.attr('data-scale');
 
 					//here i hot swap the svg path with the new svg img
@@ -109,7 +115,16 @@
 
 					//now the state overlay img is animated into place
 					//and once complete, we determine where the pins should animate to
-					TweenMax.to(overlay,.2,{width:scale + "%",left:x,top:y, svgOrigin: "0 0",onComplete:function(){
+					var time = 0;
+					if (!debug)
+						time = 0.2;
+					var svgOffset = $(".svgContainer").offset();
+					var svgWidth = $(".svgContainer").width();
+					var svgHeight = $(".svgContainer").height();
+					var newLeft = ((svgWidth * (x / 100) + svgOffset.left) / $(w).width()) * 100;
+					var newTop = ((svgHeight * (y / 100) + svgOffset.top) / $(w).height()) * 100;
+					//var newTop = svgWidth * (x / 100) + svgOffset.left;
+					TweenMax.to(overlay,time,{width:scale + "%",left:newLeft + "%",top:newTop + "%", svgOrigin: "0 0",onComplete:function(){
 						//loop through state data object to find correct set of location pins
 						for (i = 0; i < stateData.states.length; i++){
 							if (state.attr('id') == stateData.states[i].abbrev){
@@ -132,10 +147,14 @@
 				}
 			});
 			//state.css('z-index',100);
+			if (debug) return;
 			$('.state').each(function(){
 				if ($(this).attr('data-active') == 0){
 					$(this).css('z-index',10);
-					t.to($(this),.3,{scale:0, ease: Back.easeIn}, 0);
+					var time = 0;
+					if (!debug)
+						time = 0.3;
+					t.to($(this),time,{scale:0, ease: Back.easeIn}, 0);
 				}
 			});
 
@@ -148,7 +167,7 @@
 	}
 
 	function resetMap(){
-		pinTl = new TimelineLite({onComplete:
+		/*pinTl = new TimelineLite({onComplete:
 			function(){
 				this.clear();
 				$('.pin').css('opacity',0);
@@ -156,11 +175,13 @@
 		});
 		$.each($('.pin_' + currentState.state), function(){
 			pinTl.to($(this),.5,{top:-100},0)
-		})
+		})*/
+		
 		var path = document.getElementById(currentState.state);
 		var width = path.getBoundingClientRect().width;
 		var height = path.getBoundingClientRect().height;
 		var offset = $("#" + currentState.state).offset();
+		pinTl.reverse();
 		TweenMax.to(overlay,.2,{width:width,left:offset.left,top:offset.top,onComplete:function(){
 			t.reverse();
 		}});
@@ -169,6 +190,7 @@
 		TweenLite.to($('#details'),.5,{right:'-100%'});
 		selected = false;
 		details = false;
+		
 	}
 
 	function createPins(state){
@@ -184,7 +206,8 @@
 					'data-state':state.abbrev,
 					'data-x':$(this)[0].x,
 					'data-y':$(this)[0].y
-					});
+					})
+				.append("<img src='images/pin.png' />");
 			if($(this)[0].color === "red"){
 				pin.addClass("red");
 			}
@@ -231,10 +254,13 @@
 	}
 
 	function dropPins(){ //drop pins onto map
-		pinTl = new TimelineLite({onComplete:function(){this.clear();}});
+		pinTl = new TimelineLite({onReverseComplete:function(){this.clear();}});
+		var pinArr = [];
 		$.each($('.pin_' + currentState.state), function(){
-			pinTl.from($(this),.5,{top:-100},.3).to($(this),.5,{alpha:1},0)
+			pinArr.push($(this));
 		})
+		if (!debug)
+			pinTl.staggerFrom(pinArr,.5,{top:-100},.1).to($(this),.5,{alpha:1},0.5)
 	}
 
 	function getPinDetails(){
