@@ -30,7 +30,7 @@
 			TweenMax.to($('.state'),0,{scale:0});
 		//startAnimation();
 
-		// resize();
+		resize();
 		loadStates();
 	};
 
@@ -64,9 +64,29 @@
 		tl.fromTo($('.dice > img'), 2,{scale:0, rotation:-90},{scale:1,rotation:0, ease:Power3.easeOut},0);
 		tl.staggerTo(stateArray, .8, {scale:1, ease: Back.easeOut}, 0.2);
 
-		//river
-		//tl.to($('.river'), 4.0, {height:'108%'})
+		//animate river
+		var river = document.getElementById('riverPath'), length;
+		var riverObj = {
+			length:0,
+			pathLength:river.getTotalLength()
+		};
+		tl.to(riverObj, 5, {
+			length:riverObj.pathLength, 
+			onStart:function(){
+				river.style.display = 'block';
+			},
+			onUpdate:drawLine, 
+			onUpdateParams:[riverObj,river], 
+			ease:Linear.easeNone
+		});
+		
 	}
+
+	function drawLine(obj,orig) {
+	  orig.style.strokeDasharray = [obj.length,obj.pathLength].join(' ');
+	};
+
+
 
 	function selectState(state){//state is jquery dom element
 
@@ -148,6 +168,7 @@
 			});
 			//state.css('z-index',100);
 			if (debug) return;
+			t.to($('#river'), .5, {opacity:0});
 			$('.state').each(function(){
 				if ($(this).attr('data-active') == 0){
 					$(this).css('z-index',10);
@@ -234,6 +255,22 @@
 		return true;
 	}
 
+	function positionRiver(){
+		var river = document.getElementById('river').getBoundingClientRect();
+		var map = document.getElementById('svgMap').getBoundingClientRect();
+
+		var newWidth = map.width * 0.466;
+		var newHeight = newWidth * 2.44505907782121;
+
+		document.getElementById('river').style.width = newWidth;
+		document.getElementById('river').style.height = newHeight;
+		document.getElementById('river').style.left = map.left + ( map.width * 0.2849869862426 );
+		document.getElementById('river').style.top = map.top - ( map.height * 0.122 );
+
+
+		
+	}
+
 	function positionPins(){
 		var path = document.getElementById("overlay" + currentState.state);
 		var width = path.getBoundingClientRect().width;
@@ -303,7 +340,9 @@
 		if(selected){
 			positionPins();
 		}
-		//console.log($(window).width());
+
+		//console.log(document.getElementById('svgMap').getBoundingClientRect());
+		positionRiver();
 	}
 
 	function openVideo(){
