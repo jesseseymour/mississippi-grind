@@ -8,6 +8,7 @@
 	var tl = new TimelineLite();
 	var t = new TimelineLite();
 	var pinTl;
+	var mobile, count = 0;
 
 	var debug = false;
 
@@ -114,7 +115,7 @@
 			overlay = $('#overlay' + currentState.state)
 				.css({
 					'left':offset.left,
-					'top':offset.top,
+					'top':offset.top + document.getElementById("container").scrollTop,
 					'width':width,
 					'opacity':0
 				});
@@ -127,7 +128,18 @@
 					var x = state.attr('data-x');
 					var y = state.attr('data-y');
 					var scale = state.attr('data-scale');
-
+					if (mobile){
+						switch (state.attr('id')){
+							case 'IL':
+							case 'MS':
+								scale = 50;
+								break;
+							default:
+								scale = 80;
+								break;
+						}
+					}
+					//if(mobile) scale
 					//here i hot swap the svg path with the new svg img
 					//when the animation is ready, in order to prevent any jumpy behavior
 					overlay.css('opacity',1);
@@ -142,7 +154,7 @@
 					var svgWidth = $(".svgContainer").width();
 					var svgHeight = $(".svgContainer").height();
 					var newLeft = ((svgWidth * (x / 100) + svgOffset.left) / $(w).width()) * 100;
-					var newTop = ((svgHeight * (y / 100) + svgOffset.top) / $(w).height()) * 100;
+					var newTop = ((svgHeight * (y / 100) + svgOffset.top + document.getElementById("container").scrollTop) / $(w).height()) * 100;
 					//var newTop = svgWidth * (x / 100) + svgOffset.left;
 					TweenMax.to(overlay,time,{width:scale + "%",left:newLeft + "%",top:newTop + "%", svgOrigin: "0 0",onComplete:function(){
 						//loop through state data object to find correct set of location pins
@@ -188,27 +200,21 @@
 	}
 
 	function resetMap(){
-		/*pinTl = new TimelineLite({onComplete:
-			function(){
-				this.clear();
-				$('.pin').css('opacity',0);
-			}
-		});
-		$.each($('.pin_' + currentState.state), function(){
-			pinTl.to($(this),.5,{top:-100},0)
-		})*/
-		
+		if (mobile){
+			$("#container").scrollTo($("#svgMap"),600);
+		}
 		var path = document.getElementById(currentState.state);
 		var width = path.getBoundingClientRect().width;
 		var height = path.getBoundingClientRect().height;
 		var offset = $("#" + currentState.state).offset();
+		var newTop = offset.top + document.getElementById("container").scrollTop;
 		pinTl.reverse();
-		TweenMax.to(overlay,.2,{width:width,left:offset.left,top:offset.top,onComplete:function(){
+		TweenMax.to(overlay,.2,{width:width,left:offset.left,top:newTop,onComplete:function(){
 			t.reverse();
 		}});
 		
 		$("#" + currentState.state).attr('data-active','0');
-		TweenLite.to($('#details'),.5,{right:'-100%'});
+		if (!mobile) TweenLite.to($('#details'),.5,{right:'-100%'});
 		selected = false;
 		details = false;
 		
@@ -265,7 +271,7 @@
 		document.getElementById('river').style.width = newWidth;
 		document.getElementById('river').style.height = newHeight;
 		document.getElementById('river').style.left = map.left + ( map.width * 0.2849869862426 );
-		document.getElementById('river').style.top = map.top - ( map.height * 0.122 );
+		document.getElementById('river').style.top = map.top - ( map.height * 0.122 ) + document.getElementById("container").scrollTop;
 
 
 		
@@ -281,7 +287,7 @@
 			var percX = width * $(this).attr('data-x');
 			var percY = height * $(this).attr('data-y');
 			var newLeft = offset.left + percX - ($(this).width() / 2);
-			var newTop = offset.top + percY - $(this).height();
+			var newTop = offset.top + document.getElementById("container").scrollTop + percY - $(this).height();
 
 			$(this).css({
 				'left':newLeft,
@@ -305,7 +311,10 @@
 		var state = pin.attr('data-state');
 		var id = pin.attr('data-pinid');
 		var panel = $('#panel_' + state + '_' + id);
-		
+		if (mobile){
+			$("#container").scrollTo(panel,600);
+			return;
+		}
 		if (details){
 			TweenLite.to($('#details'),.5,{right:'-100%',onComplete:function(){
 				showDetailsPanel(panel);
@@ -319,6 +328,7 @@
 	}
 
 	function showDetailsPanel(panel){
+		if(mobile) return;
 		hideAllDetails();
 		panel.css('visibility','visible');
 		TweenLite.to($('#details'),.5,{right:'3%'});
@@ -329,6 +339,20 @@
 	}
 
 	function resize() {
+		
+		var isMobile = mobile;
+
+		if ($('.pixel').css('visibility') == 'hidden'){
+			mobile = false;
+		}
+		else
+		{
+			mobile = true;
+		}
+		if (isMobile != mobile ){
+			//if(count>0)location.reload();
+			//count++;
+		}
 		var s = $('.states');
 		var maxHeight = 755;
 		var maxWidth = 709;
