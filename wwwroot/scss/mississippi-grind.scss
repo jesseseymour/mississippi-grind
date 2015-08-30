@@ -4,10 +4,11 @@ ITCBookmanW01-BoldItali
 ITC Bookman W01 Medium
 */
 @mixin bmBoldItalic{
-	font-family: 'ITCBookmanW01-BoldItali';
+	font-family: 'ITCBookmanW03-MediumIta';
+	//font-family: 'ITCBookmanW01-BoldItali';
 }
 @mixin bmMedium{
-	font-family: 'ITC Bookman W01 Medium';
+	font-family: 'ITC Bookman W01 Light';
 }
 $gold : #f9de82;
 $yellow: #fecd21;
@@ -34,7 +35,8 @@ span.pixel{
 		visibility: visible;
 	}
 }
-#logo{
+#logo,
+.logo{
 	width: 28%;
 	max-width: 483px;
 	position: absolute;
@@ -241,11 +243,11 @@ span.pixel{
 	@media #{$mobilebreakpoint}{
 		position:relative;
 		top: auto;
-		right: auto;
+		right: auto !important;
 		margin: 0 auto;
 		max-width: none;
 		.panel{
-			visibility: visible;
+			visibility: visible !important;
 			position: relative;
 			top: auto;
 			left: auto;
@@ -285,7 +287,7 @@ span.pixel{
 }
 #thisFall{
 	@include bmBoldItalic;
-	color: $gold;
+	color: #ffffff;
 	text-align: right;
 	font-size: 18px;
 	line-height: 1.2;
@@ -294,6 +296,7 @@ span.pixel{
 	position: relative;
 	span{
 		font-size: 14px;
+		color: $gold;
 	}
 	img{
 		position:absolute;
@@ -374,6 +377,65 @@ span.pixel{
 				border-bottom: 0;
 				min-width: 80%;
 			}
+		}
+	}
+}
+.fancybox-lock .fancybox-overlay{
+	overflow: hidden;
+	overflow-y: hidden;
+}
+.fancybox-overlay{
+	background: rgba(0,0,0,0.7);
+	.logo{
+
+		top: 4% !important;
+		left: 0 !important;
+		width: 160px !important;
+		.dice {
+
+			> img{
+				transform: none;
+			}
+			.die1{
+				top: -15px;
+			}
+			.die2{
+				top: -20px;
+			}
+		}
+		@media #{$mobilebreakpoint}{
+			display: none !important;
+		}
+	}
+}
+.fancybox-close{
+	background: none;
+	top: -30px;
+	&:before{
+		content:"X";
+		color: $gold;
+		@include bmMedium;
+		font-size: 24px;
+		background: none;
+	}
+}
+.fancybox-skin{
+	border-radius: 0;
+}
+.fancybox-nav{
+	span{
+		background: transparent url(/images/prev-next.png) no-repeat left top;
+		width: 55px;
+		height: 55px;
+		visibility: visible;
+	}
+	&.fancybox-prev{
+		left: -80px;
+	}	
+	&.fancybox-next{
+		right: -80px;
+		span{
+			background-position: right top;
 		}
 	}
 }

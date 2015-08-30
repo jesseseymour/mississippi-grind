@@ -13,16 +13,17 @@
 	var debug = false;
 
 	var init = function(){
+		
 		$('svg .state').on('click',function(){
 			var stateName = $(this).attr('id');
 			selectState($("#" + stateName));
 		})
 		if(debug)
-			selectState($("#LA"))
+			selectState($("#IA"))
 
 		$(d).on('click','.backToMap',resetMap);
 		$(d).on('click','.pin',getPinDetails);
-		$(d).on('click','.video',openVideo);
+		//$(d).on('click','.video',openVideo);
 		//console.log(document.getElementById("IA").getBoundingClientRect());
 
 		//set states to scale 0 and transformOrigin to center
@@ -179,7 +180,7 @@
 				}
 			});
 			//state.css('z-index',100);
-			if (debug) return;
+			//if (debug) return;
 			t.to($('#river'), .5, {opacity:0});
 			$('.state').each(function(){
 				if ($(this).attr('data-active') == 0){
@@ -252,8 +253,40 @@
 			$('.a1',$elem).text(data.name);
 			$('.a2',$elem).text(data.address);
 			$('.a3',$elem).text(data.city + ', ' + state.abbrev + ', ' + data.zip);
-			$('.video',$elem).attr('data-ytid',data.ytid);
-			$('.photo',$elem).attr('data-featherlight',data.images[0]);
+			
+			if (data.ytid == "") {
+				$('.video',$elem).hide();
+			}else
+			{
+				//$('.video',$elem).attr('data-fancybox-href',"http://www.youtube.com/embed/" + data.ytid);
+				$('.video',$elem).on('click', function(){
+					$.fancybox.open({
+						href: "http://www.youtube.com/embed/" + data.ytid
+					},
+					{
+						type: 'iframe',
+						padding: 4,
+						margin: 40
+					})
+				})
+			}
+			if (data.images.length) {
+				var group = [];
+				for (var i = 0; i < data.images.length; i++){
+					var img = {href: 'images/locations/' + data.images[i]};
+					group.push(img)
+				}
+				$('.photo',$elem).on('click',function(){
+					$.fancybox.open(group,{
+						padding: 0,
+						margin: [40, 100, 40, 100]
+					})
+				})
+			}else{
+				$('.photo',$elem).hide();
+			}
+			
+			$('.share a', $elem).attr('href',data.url);
 			$('.thumb',$elem).html('<img src="/images/thumbs/' + data.thumb + '" />');
 			$("#details").append($elem);
 			counter++;
@@ -302,7 +335,7 @@
 		$.each($('.pin_' + currentState.state), function(){
 			pinArr.push($(this));
 		})
-		if (!debug)
+		//if (!debug)
 			pinTl.staggerFrom(pinArr,.5,{top:-100},.1).to($(this),.5,{alpha:1},0.5)
 	}
 
@@ -369,18 +402,16 @@
 		positionRiver();
 	}
 
-	function openVideo(){
-		var ytid = $(this).attr('data-ytid');
-		var content = "<div class='embed-container'><iframe src='http://www.youtube.com/embed/" + ytid + "' frameborder='0' allowfullscreen></iframe></div>";
-		$.featherlight(content);
-	}
+	
 	
 	w.onresize = function(){
 		resize();
 	}
-
-	$.featherlight.defaults.variant = "mg";
-	$.featherlight.defaults.closeIcon = "X";
-
+	
+	$.extend($.fancybox.defaults.tpl, {
+		wrap: '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div><div class="logo"><div class="dice"><img class="die1" src="images/die-1.png" alt="" /><img class="die2" src="images/die-2.png" alt="" /></div><img src="images/mississippi-grind-we-cant-lose.png" alt="Mississippi Grind. We Can\'t Lose" /></div>'
+	});
+	$.fancybox.defaults.nextEffect = "none";
+	$.fancybox.defaults.prevEffect = "none";
 	$(d).ready(init);
 }(jQuery, window, document));
