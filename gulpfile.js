@@ -40,13 +40,13 @@ gulp.task('imagemin', function() {
 });
 
 gulp.task('uglify', function() {
-	gulp.src('wwwroot/js/*.js')
+	gulp.src(['wwwroot/js/*.js', '!**/*.min.js'])
 		.pipe(uglify())
 		.pipe(gulp.dest('wwwroot/dist/js'))
 });
 
 gulp.task('minify', function(){
-	gulp.src('wwwroot/css/*.css')
+	gulp.src(['wwwroot/css/*.css', '!**/*.min.css'])
 		.pipe(minifyCss())
 		.pipe(gulp.dest('wwwroot/dist/css'));
 })

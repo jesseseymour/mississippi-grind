@@ -2,10 +2,10 @@
 	var stateArray = [],
 	stateData,
 	currentState = {},
-	overlay,
+	overlay,animating = false,
 	details = false,
 	selected = false;
-	var tl = new TimelineLite();
+	var tl = new TimelineLite({onComplete: function(){animating = false;}});
 	var t = new TimelineLite();
 	var pinTl;
 	var mobile, count = 0;
@@ -61,10 +61,13 @@
 	}
 
 	function startAnimation() {
+		$(".scaling-svg-container").css('visibility','visible');
 		//animate in states
-
-		tl.fromTo($('.dice > img'), 2,{scale:0, rotation:-90},{scale:1,rotation:0, ease:Power3.easeOut},0);
-		tl.staggerTo(stateArray, .8, {scale:1, ease: Back.easeOut}, 0.2);
+		animating = true;
+		tl.fromTo($('.dice > img'), 1,{scale:0, rotation:-90},{scale:1,rotation:0, ease:Power3.easeOut},0);
+		tl.staggerTo(stateArray, .4, {scale:1, ease: Back.easeOut}, 0.2);
+		tl.addLabel('afterStates');
+		tl.staggerFrom($('.pin.red'), .7, {top:'-100%', ease:Power3.easeOut}, .2);
 
 		//animate river
 		var river = document.getElementById('riverPath'), length;
@@ -72,7 +75,7 @@
 			length:0,
 			pathLength:river.getTotalLength()
 		};
-		tl.to(riverObj, 5, {
+		tl.to(riverObj, 3, {
 			length:riverObj.pathLength, 
 			onStart:function(){
 				river.style.display = 'block';
@@ -80,7 +83,7 @@
 			onUpdate:drawLine, 
 			onUpdateParams:[riverObj,river], 
 			ease:Linear.easeNone
-		});
+		}, 'afterStates');
 		
 	}
 
@@ -91,7 +94,7 @@
 
 
 	function selectState(state){//state is jquery dom element
-
+		if (animating) return;
 		if (!selected){
 			
 			state.attr('data-active','1');
@@ -103,15 +106,7 @@
 			var height = path.getBoundingClientRect().height;
 			var offset = state.offset();
 			var px = $("#test");
-			//console.log("width: " + width + " | height: " + height + " | offset left: " + offset.left + " | offset top: " + offset.top);
 			
-			// px.css({
-			// 	left:offset.left,
-			// 	top: offset.top,
-			// 	width: width,
-			// 	height: height
-			// })
-
 			//now lets create a new svg and place it over the selected state
 			overlay = $('#overlay' + currentState.state)
 				.css({
@@ -121,8 +116,6 @@
 					'opacity':0
 				});
 			
-
-			//return;
 			selected = true;
 			t = new TimelineLite({
 				onComplete:function(){
@@ -140,7 +133,6 @@
 								break;
 						}
 					}
-					//if(mobile) scale
 					//here i hot swap the svg path with the new svg img
 					//when the animation is ready, in order to prevent any jumpy behavior
 					overlay.css('opacity',1);
@@ -156,7 +148,6 @@
 					var svgHeight = $(".svgContainer").height();
 					var newLeft = ((svgWidth * (x / 100) + svgOffset.left) / $(w).width()) * 100;
 					var newTop = ((svgHeight * (y / 100) + svgOffset.top + document.getElementById("container").scrollTop) / $(w).height()) * 100;
-					//var newTop = svgWidth * (x / 100) + svgOffset.left;
 					TweenMax.to(overlay,time,{width:scale + "%",left:newLeft + "%",top:newTop + "%", svgOrigin: "0 0",onComplete:function(){
 						//loop through state data object to find correct set of location pins
 						for (i = 0; i < stateData.states.length; i++){
@@ -179,9 +170,7 @@
 					})
 				}
 			});
-			//state.css('z-index',100);
-			//if (debug) return;
-			t.to($('#river'), .5, {opacity:0});
+			t.to($('#river, .pin.red'), .5, {opacity:0});
 			$('.state').each(function(){
 				if ($(this).attr('data-active') == 0){
 					$(this).css('z-index',10);
@@ -236,9 +225,7 @@
 					'data-y':$(this)[0].y
 					})
 				.append("<img src='images/pin.png' />");
-			if($(this)[0].color === "red"){
-				pin.addClass("red");
-			}
+			
 			$('.container').append(pin);
 
 			//clone content container and popuplate with json data
@@ -383,8 +370,9 @@
 			mobile = true;
 		}
 		if (isMobile != mobile ){
-			//if(count>0)location.reload();
-			//count++;
+			if(count>0) resetMap();
+			count++;
+
 		}
 		var s = $('.states');
 		var maxHeight = 755;
