@@ -117,8 +117,9 @@ span.pixel{
 	overflow: hidden;
 	position: relative;
 	@media #{$mobilebreakpoint}{
-		overflow: scroll;
+		overflow: hidden;
 		overflow-x: hidden;
+		height: auto;
 		//position: static;
 	}
 }
@@ -155,10 +156,25 @@ span.pixel{
 		top: 20%;
 		width: 5%;
 		z-index: 200;
+		overflow:hidden;
+		img{
+			position:relative;
+			width: 200%;
+			left:0;
+			top:0;
+		}
+		
 	}
 	img{
-		width: 100%;
+		width: 200%;
 		height: auto;
+		left:0;
+		position:relative;
+	}
+	&:hover{
+		img{
+			left:-100%;
+		}
 	}
 	@media #{$mobilebreakpoint}{
 		width: 5%;
@@ -182,6 +198,7 @@ span.pixel{
 		border-radius:0;
 		box-shadow:none;
 		width: 100%;
+		display: block;
 		visibility: hidden;
 		font-size: 14px;
 		.backToMap{
@@ -269,6 +286,7 @@ span.pixel{
 		max-width: none;
 		.panel{
 			visibility: visible !important;
+			display: none;
 			position: relative;
 			top: auto;
 			left: auto;
@@ -315,9 +333,10 @@ span.pixel{
 	margin-top: 40px;
 	margin-right: 95px;
 	position: relative;
-	span{
+	a{
 		font-size: 14px;
 		color: $gold;
+		
 	}
 	img{
 		position:absolute;
@@ -482,5 +501,22 @@ span.pixel{
 .embed-container iframe, 
 .embed-container object, 
 .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-
+.comments-top{
+	background: transparent url(/images/comments-top.png) repeat-x left top;
+	height: 29px;
+	width: 100%;
+}
+.fb-comments-container{
+	background: #e3e3e3;
+}
+.fb-comments {
+    width: 100%;
+    background: #e3e3e3;
+    display: block;
+}
+.fb-comments > span, .fb-comments iframe {
+    width: 100% !important;
+}
+.fb-comments > span, .fb-comments iframe {
+    width: 100% !important;
+}

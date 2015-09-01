@@ -21,10 +21,20 @@
     </head>
 
     <body>
+    <div id="top"></div>
+    <div id="fb-root"></div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     
 
       <div class="container" id="container">
-        <div id="thisFall">IN THEATERS THIS FALL<br/><span>VISIT OFFICIAL SITE</span><img src="images/fb.png" alt="facebook" /></div>
+        <div id="thisFall">IN THEATERS THIS FALL<br/><a href="http://mississippigrind-movie.com/">VISIT OFFICIAL SITE</a><a href="https://www.facebook.com/MississippiGrindMovie"><img src="images/fb.png" alt="facebook" /></a></div>
         
         <div id="logo" class="logo">
           <div class="dice">
@@ -32,15 +42,15 @@
           </div>
           <img src="images/mississippi-grind-we-cant-lose.png" alt="Mississippi Grind. We Can't Lose" /></div>
         <div class="scaling-svg-container svgContainer" style="">
-            <div class="pin red" style="left:46%;top:0%;"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 51%;top: 20%;"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 49%;top: 21%;"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 38%;top: 38%;"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 43%;top: 40%;" isrender="true"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 57%;top: 39%;" isrender="true"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 56%;top: 42%;"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 54%;top: 55%;" isrender="true"><img src="images/pin-red.png"></div>
-            <div class="pin red" style="left: 54%;top: 66%;"><img src="images/pin-red.png"></div>
+            <div class="pin red" data-parent="ia" style="left:46%;top:0%;"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="mo" style="left: 51%;top: 20%;"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="mo" style="left: 49%;top: 21%;"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="ar" style="left: 38%;top: 38%;"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="ar" style="left: 43%;top: 40%;" isrender="true"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="tn" style="left: 57%;top: 39%;" isrender="true"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="ms" style="left: 56%;top: 42%;"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="ms" style="left: 54%;top: 55%;" isrender="true"><img src="images/pin.png"></div>
+            <div class="pin red" data-parent="la" style="left: 54%;top: 66%;"><img src="images/pin.png"></div>
             <svg version="1.1" id="svgMap" class="scaling-svg" viewBox="0 0 655 750" reserveAspectRatio="xMidYMin slice">
                 <g class="state" id="IA" data-x="15" data-y="17" data-scale="26" data-active="0">
                   <path fill="#CBB082" d="M138.444,12.599c-1.666,1.667,1.867,3.907,2.268,4.871c0.151,0.365,0.027,0.787,0.051,1.178
@@ -548,7 +558,10 @@
           <div>FEELING LUCKY?<br/><span>Post your favorite places below to get some action along the Mississippi River and maybe we'll add 'em here!</span></div>
         </div>
     </div><!-- /.container -->
-
+    <div class="comments-top"></div>
+    <div class="fb-comments-container">
+        <div class="fb-comments" data-href="http://mississippi-grind.dev.realpie.com/" data-width="100%" data-numposts="5"></div>
+    </div>
     <span class="pixel"></span>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/jquery.scrollTo.min.js"></script>

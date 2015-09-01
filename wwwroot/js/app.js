@@ -67,13 +67,13 @@
 		tl.fromTo($('.dice > img'), 1,{scale:0, rotation:-90},{scale:1,rotation:0, ease:Power3.easeOut},0);
 		tl.staggerTo(stateArray, .4, {scale:1, ease: Back.easeOut}, 0.2);
 		tl.addLabel('afterStates');
-		tl.staggerFrom($('.pin.red'), .7, {top:'-100%', ease:Power3.easeOut}, .2);
+		tl.staggerFrom($('.pin.red'), .7, {top:$('.scaling-svg-container').offset().top * -1 - 200, ease:Power3.easeOut}, .2);
 
 		//animate river
 		var river = document.getElementById('riverPath'), length;
 		var riverObj = {
 			length:0,
-			pathLength:river.getTotalLength()
+			pathLength:river.getTotalLength() - 95
 		};
 		tl.to(riverObj, 3, {
 			length:riverObj.pathLength, 
@@ -107,6 +107,16 @@
 			var offset = state.offset();
 			var px = $("#test");
 			
+			if (mobile){
+				$('.panel').each(function(){
+					if($(this).attr('data-state') == currentState.state){
+						$(this).fadeIn();
+					}else{
+						$(this).fadeOut();
+					}
+				})
+			}
+
 			//now lets create a new svg and place it over the selected state
 			overlay = $('#overlay' + currentState.state)
 				.css({
@@ -148,7 +158,13 @@
 					var svgHeight = $(".svgContainer").height();
 					var newLeft = ((svgWidth * (x / 100) + svgOffset.left) / $(w).width()) * 100;
 					var newTop = ((svgHeight * (y / 100) + svgOffset.top + document.getElementById("container").scrollTop) / $(w).height()) * 100;
-					TweenMax.to(overlay,time,{width:scale + "%",left:newLeft + "%",top:newTop + "%", svgOrigin: "0 0",onComplete:function(){
+					if (!mobile){
+						newTop = newTop + "%";
+					}else{
+						var logo = document.getElementById('logo').getBoundingClientRect();
+						newTop = logo.top + logo.height + 100 + document.body.scrollTop;
+					}
+					TweenMax.to(overlay,time,{width:scale + "%",left:newLeft + "%",top:newTop, svgOrigin: "0 0",onComplete:function(){
 						//loop through state data object to find correct set of location pins
 						for (i = 0; i < stateData.states.length; i++){
 							if (state.attr('id') == stateData.states[i].abbrev){
@@ -190,9 +206,12 @@
 	}
 
 	function resetMap(){
+		$(".panel").show();
 		if (mobile){
-			$("#container").scrollTo($("#svgMap"),600);
+			$("body").scrollTo($("#svgMap"),600);
+			$(".panel").hide();
 		}
+
 		var path = document.getElementById(currentState.state);
 		var width = path.getBoundingClientRect().width;
 		var height = path.getBoundingClientRect().height;
@@ -291,7 +310,7 @@
 		document.getElementById('river').style.width = newWidth;
 		document.getElementById('river').style.height = newHeight;
 		document.getElementById('river').style.left = map.left + ( map.width * 0.2849869862426 );
-		document.getElementById('river').style.top = map.top - ( map.height * 0.122 ) + document.getElementById("container").scrollTop;
+		document.getElementById('river').style.top = map.top - ( map.height * 0.122 ) + document.body.scrollTop;
 
 
 		
@@ -317,7 +336,16 @@
 	}
 
 	function dropPins(){ //drop pins onto map
-		pinTl = new TimelineLite({onReverseComplete:function(){this.clear();}});
+		pinTl = new TimelineLite({
+			onReverseComplete:function(){
+				this.clear();
+			},
+			onComplete:function(){
+				if(!mobile){
+					pinArr[0].trigger('click');
+				}
+			}
+		});
 		var pinArr = [];
 		$.each($('.pin_' + currentState.state), function(){
 			pinArr.push($(this));
@@ -327,12 +355,17 @@
 	}
 
 	function getPinDetails(){
+		if($(this).hasClass('red')){
+			var parent = $(this).attr('data-parent').toUpperCase();
+			$("#" + parent).trigger('click');
+			return;
+		}
 		var pin = $(this);
 		var state = pin.attr('data-state');
 		var id = pin.attr('data-pinid');
 		var panel = $('#panel_' + state + '_' + id);
 		if (mobile){
-			$("#container").scrollTo(panel,600);
+			$("body").scrollTo(panel,600);
 			return;
 		}
 		if (details){
