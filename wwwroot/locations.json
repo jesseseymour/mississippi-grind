@@ -27,7 +27,7 @@
 				"images":["Iowa Greyhound Park Ben Ryan Casino.jpg"],
 				"ytid":"K7b2L538S-c",
 				"color":"red",
-				"thumb":"IA.jpg",
+				"thumb":"greyhound-park.jpg",
 				"url":"http://www.igaracing.com/"
 			},
 			{
@@ -40,7 +40,7 @@
 				"images":["Bluebird Diner 3_border.jpg","Bluebird Diner 8_border.jpg"],
 				"ytid":"",
 				"color":"red",
-				"thumb":"IA.jpg",
+				"thumb":"bluebird-diner.jpg",
 				"url":"http://www.thebluebirddiner.com/"
 			},
 			{
@@ -53,7 +53,7 @@
 				"images":["Murphs Tap 3.jpg","Murphs Tap Ben Ryan Cheers.jpg"],
 				"ytid":"",
 				"color":"red",
-				"thumb":"IA.jpg",
+				"thumb":"murphs.jpg",
 				"url":"http://www.murphstapdbq.com"
 			}
 		]
@@ -73,7 +73,7 @@
 				"images":[],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"",
 				"url":"http://www.atlasobscura.com/places/armour-meatpacking-plant"
 			}
 		]
@@ -93,7 +93,7 @@
 				"images":["Arch 6.jpg","Gateway Arch 2.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"gateway-arch.jpg",
 				"url":"http://www.gatewayarch.com/"
 			},
 			{
@@ -106,7 +106,7 @@
 				"images":["Magnolia Hotel 1.png"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"magnolia-hotel.jpg",
 				"url":"http://www.magnoliahotels.com/magnolia-stlouis/magnolia-hotel-magnolia-stlouis.php"
 			}
 		]
@@ -123,10 +123,10 @@
 				"address":"183 Beale St",
 				"city":"Memphis",
 				"zip":"38103",
-				"images":["Sily O Sullivans 4.png"],
+				"images":["Silky O Sullivans 4.png"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"silky-osullivans.jpg",
 				"url":"http://www.silkyosullivans.com/"
 			},
 			{
@@ -139,7 +139,7 @@
 				"images":["Graceland 1.jpg","Graceland 2.jpg","Graceland 4.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"graceland.jpg",
 				"url":"http://www.graceland.com/visit/plan_your_visit/hours.aspx"
 			},
 			{
@@ -152,7 +152,7 @@
 				"images":["Rum Boogie Cafe 2.png","Rum Boogie Cafe 3.png"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"rum-boogie.jpg",
 				"url":"http://rumboogie.com/"
 			}
 		]
@@ -163,8 +163,8 @@
 		"img":"arkansas.png",
 		"pins":[
 			{
-				"x":0.44, 
-				"y":0.61,
+				"x":0.88, 
+				"y":0.44,
 				"name":"Southland Park Gaming and Racing",
 				"address":"1550 Ingram Blvd.",
 				"city":"West Memphis",
@@ -172,7 +172,7 @@
 				"images":["Southland Park 4.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"southland-park.jpg",
 				"url":"http://www.southlandpark.com/"
 			},
 			{
@@ -185,7 +185,7 @@
 				"images":["Mark Twain Boat Ben & Ryan in Jackets.jpg","Mark-Twain-Boat-2.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"mark-twain.jpg",
 				"url":"http://damriverboat.com/Mark_Twain_Riverboat.html"
 			},
 			{
@@ -195,15 +195,15 @@
 				"address":"2127 N Main St",
 				"city":"Little Rock",
 				"zip":"72114",
-				"images":["Shipleys Donuts 1.jpg","Shipleys Donuts 2.jpg"],
+				"images":["Shipleys Donuts 1.jpg","Shipleys Donuts 2.png"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"shipleys.jpg",
 				"url":"http://www.shipleydonuts.com/"
 			},
 			{
-				"x":0.84, 
-				"y":0.57,
+				"x":0.44, 
+				"y":0.61,
 				"name":"Doe’s Eat Place ",
 				"address":"1023 W Markham St",
 				"city":"Little Rock",
@@ -211,7 +211,7 @@
 				"images":["Eat Does Place 1.jpg","Eat Does Place 2.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"does.jpg",
 				"url":"http://www.doeseatplace.net/"
 			},
 			{
@@ -224,7 +224,7 @@
 				"images":[],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"",
 				"url":"http://www.atlasobscura.com/places/toad-suck"
 			}
 		]
@@ -244,7 +244,7 @@
 				"images":["Sams Town Tunica 3.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"sams-town.jpg",
 				"url":"http://www.samstowntunica.com/"
 			},
 			{
@@ -257,7 +257,7 @@
 				"images":["Hollywood Casino Tunica 3.jpg","Hollywood Casino Tunica 5.jpg","Hollywood Casino Tunica 6.jpg","Hollywood Casino Tunica 8.jpg","Tunica Sams Town Casino.jpg"],
 				"ytid":"rVV6ixvppqo",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"hollywood-casino.jpg",
 				"url":"http://www.hollywoodcasinotunica.com/?gclid=CMualdnL_sYCFQaVfgod0UIKyg"
 			},
 			{
@@ -270,7 +270,7 @@
 				"images":["Cedar Grove Inn 5.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"cedar-grove.jpg",
 				"url":"http://www.cedargroveinn.com/history.php"
 			},
 			{
@@ -280,10 +280,10 @@
 				"address":"2200 Oak St",
 				"city":"Vicksburg",
 				"zip":"39180",
-				"images":["CocaCola Museum 1.jpg","CocaCola Museum 2.jpg","CocaCola Museum 7.jpg"],
+				"images":["CocaCola Museum 1.jpg","CocaCola Museum 2.jpg","CocaCola Museum 7.gif"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"cocacola-museum.jpg",
 				"url":"http://www.cedargroveinn.com/history.php"
 			}
 		]
@@ -294,8 +294,8 @@
 		"img":"louisiana.png",
 		"pins":[
 			{
-				"x":0.89, 
-				"y":0.79,
+				"x":0.63, 
+				"y":0.73,
 				"name":"Mike the Tiger Habitat",
 				"address":"N Stadium Rd",
 				"city":"Baton Rouge",
@@ -303,7 +303,7 @@
 				"images":["Mike the Tiger 2.jpg","Mike the Tiger 3.jpg","Mike the Tiger 4.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"mike-the-tiger.jpg",
 				"url":"http://www.mikethetiger.com"
 			},
 			{
@@ -316,7 +316,7 @@
 				"images":["NOLA Fairgrounds 12.jpg","NOLA Fairgrounds Race Course 7.jpg","NOLA Fairgrounds Race Course 8.jpg","NOLA Fairgrounds Race Course.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"nola-fairgrounds.jpg",
 				"url":"https://www.fairgroundsracecourse.com/"
 			},
 			{
@@ -326,10 +326,10 @@
 				"address":"Garden District",
 				"city":"New Orleans",
 				"zip":"",
-				"images":["Garden District 3.jpg","Garden District 4.jpg","Garden Distric 10.jpg"],
+				"images":["Garden District 3.jpg","Garden District 4.jpg","Garden District 10.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"garden-district.jpg",
 				"url":"http://www.neworleanscvb.com/visit/neighborhoods/garden-district/"
 			},
 			{
@@ -342,12 +342,12 @@
 				"images":["Harrahs 1.jpg","Harrahs 2.jpg","Harrahs Ben Dice.jpg","Harrahs Meal.jpg"],
 				"ytid":"MdjZ8RW-tCc",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"harrahs.jpg",
 				"url":"https://www.caesars.com/harrahs-new-orleans"
 			},
 			{
-				"x":0.65, 
-				"y":0.73,
+				"x":0.89, 
+				"y":0.79,
 				"name":"Bourbon Street",
 				"address":"Bourbon Street",
 				"city":"New Orleans",
@@ -355,7 +355,7 @@
 				"images":[],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"",
 				"url":"http://bourbonstreet.com/"
 			},
 			{
@@ -368,7 +368,7 @@
 				"images":[],
 				"ytid":"4N8hky1rGqA",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"",
 				"url":"https://www.facebook.com/pages/Top-Dollar-Pawn-Shop/126738597380231"
 			},
 			{
@@ -381,7 +381,7 @@
 				"images":["NOLA Treehouse 1.jpg","NOLA Treehouse 3.jpg","NOLA Treehouse 4.jpg","NOLA Treehouse 5.jpg"],
 				"ytid":"",
 				"color":"blue",
-				"thumb":"IA.jpg",
+				"thumb":"nola-treehouse.jpg",
 				"url":"http://www.atlasobscura.com/places/the-new-orleans-treehouse"
 			}
 		]

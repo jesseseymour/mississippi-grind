@@ -38,10 +38,11 @@ span.pixel{
 }
 #logo,
 .logo{
-	width: 28%;
+	width: 34.5%;
 	max-width: 483px;
 	position: absolute;
 	top: 160px;
+	top: 17%;
 	left: 0;
 	> img{
 		width: 100%;
@@ -77,7 +78,7 @@ span.pixel{
 		top: auto;
 		left: auto;
 		margin: 0 auto;
-		margin-top: 50px;
+		margin-top: 50px !important;
 	}
 }
 
@@ -109,6 +110,8 @@ span.pixel{
 }
 .container{
 	width: 100%;
+	//max-width: 1400px;
+	margin: 0 auto;
 	height: 100%;
 	padding: 0;
 	@media (min-width: 992px){
@@ -171,7 +174,8 @@ span.pixel{
 		left:0;
 		position:relative;
 	}
-	&:hover{
+	&:hover,
+	&.active{
 		img{
 			left:-100%;
 		}
@@ -201,6 +205,8 @@ span.pixel{
 		display: block;
 		visibility: hidden;
 		font-size: 14px;
+		-webkit-filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
+    	filter:         drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
 		.backToMap{
 			background: #146595 url(/images/left-arrow.png) no-repeat 14px center;
 			line-height: 28px;
@@ -214,6 +220,9 @@ span.pixel{
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
 			cursor: pointer;
+			//box-shadow: 0 -3px 10px 0 rgba(0,0,0,0.35);
+			position: relative;
+			z-index: 20;
 			@include bmMedium;
 		}
 		.content{
@@ -223,6 +232,9 @@ span.pixel{
 			width: 100%;
 			color: #ffffff;
 			line-height: 1;
+			//box-shadow: 0 0 10px 0 rgba(0,0,0,0.35);
+			position: relative;
+			z-index: 10;
 			.city{
 				font-size: 1.286em;
 				border-bottom: 1px solid #a46341;
@@ -254,6 +266,7 @@ span.pixel{
 			width: 90%;
 			margin: 0 auto;
 			text-align: center;
+			//box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
 			>img{
 				width: 100%;
 			}
@@ -265,6 +278,8 @@ span.pixel{
 			position: absolute;
 			left: -19px;
 			top: 113px;
+			z-index: 15;
+
 		}
 	}
 	@media #{$tabletonly}{
@@ -447,6 +462,13 @@ span.pixel{
 			display: none !important;
 		}
 	}
+}
+@media #{$mobilebreakpoint}{
+.fancybox-type-iframe{
+	.fancybox-inner{
+		height: auto !important;
+	}
+}
 }
 .fancybox-close{
 	background: none;

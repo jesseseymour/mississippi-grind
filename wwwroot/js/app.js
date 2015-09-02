@@ -19,7 +19,7 @@
 			selectState($("#" + stateName));
 		})
 		if(debug)
-			selectState($("#IA"))
+			selectState($("#AR"))
 
 		$(d).on('click','.backToMap',resetMap);
 		$(d).on('click','.pin',getPinDetails);
@@ -145,8 +145,8 @@
 					}
 					//here i hot swap the svg path with the new svg img
 					//when the animation is ready, in order to prevent any jumpy behavior
-					overlay.css('opacity',1);
-					state.css('opacity',0);
+					overlay.css({'opacity':1,'display':'block'});
+					state.css({'opacity':0,'display':'none'});
 
 					//now the state overlay img is animated into place
 					//and once complete, we determine where the pins should animate to
@@ -179,14 +179,14 @@
 
 				},
 				onReverseComplete:function(){
-					TweenLite.to(state,0,{opacity:1});
+					TweenLite.to(state,0,{opacity:1,display:"block"});
 					overlay.css({
 						left: -1000,
 						top: -1000
 					})
 				}
 			});
-			t.to($('#river, .pin.red'), .5, {opacity:0});
+			t.to($('#river, .pin.red'), .5, {opacity:0, display:'none'});
 			$('.state').each(function(){
 				if ($(this).attr('data-active') == 0){
 					$(this).css('z-index',10);
@@ -194,6 +194,7 @@
 					if (!debug)
 						time = 0.3;
 					t.to($(this),time,{scale:0, ease: Back.easeIn}, 0);
+					//t.to($(this),0,{display:'none'});
 				}
 			});
 
@@ -201,7 +202,7 @@
 			
 		} else {
 			
-			selected = false;
+			//selected = false;
 		}
 	}
 
@@ -267,7 +268,7 @@
 				//$('.video',$elem).attr('data-fancybox-href',"http://www.youtube.com/embed/" + data.ytid);
 				$('.video',$elem).on('click', function(){
 					$.fancybox.open({
-						href: "http://www.youtube.com/embed/" + data.ytid
+						href: "http://www.youtube.com/embed/" + data.ytid + "?autoplay=1"
 					},
 					{
 						type: 'iframe',
@@ -293,7 +294,12 @@
 			}
 			
 			$('.share a', $elem).attr('href',data.url);
-			$('.thumb',$elem).html('<img src="/images/thumbs/' + data.thumb + '" />');
+			if (data.thumb == ""){
+				$(".thumb",$elem).hide();
+			}else{
+				$('.thumb',$elem).html('<img src="/images/thumbs/' + data.thumb + '" />');
+			}
+			
 			$("#details").append($elem);
 			counter++;
 		})
@@ -350,11 +356,14 @@
 		$.each($('.pin_' + currentState.state), function(){
 			pinArr.push($(this));
 		})
+		pinArr[0].addClass('active');
 		//if (!debug)
 			pinTl.staggerFrom(pinArr,.5,{top:-100},.1).to($(this),.5,{alpha:1},0.5)
 	}
 
 	function getPinDetails(){
+		$('.pin').removeClass('active');
+		$(this).addClass('active');
 		if($(this).hasClass('red')){
 			var parent = $(this).attr('data-parent').toUpperCase();
 			$("#" + parent).trigger('click');
@@ -418,6 +427,12 @@
 		if(selected){
 			positionPins();
 		}
+
+		/*if (!mobile){
+			$("#logo").css('margin-top',$("#logo").height() / 2 * -1);
+		}else{
+			//$("#logo").css('margin-top','0');
+		}*/
 
 		//console.log(document.getElementById('svgMap').getBoundingClientRect());
 		positionRiver();
