@@ -5,10 +5,13 @@
 	overlay,animating = false,
 	details = false,
 	selected = false;
-	var tl = new TimelineLite({onComplete: function(){animating = false;}});
+	var tl = new TimelineLite({onComplete: function(){animating = false;goToDeepLink();}});
 	var t = new TimelineLite();
 	var pinTl;
 	var mobile, count = 0;
+	var spinChip = false;
+	var bounceArrow = false;
+	var deepLink = false;
 
 	var debug = false;
 
@@ -21,8 +24,12 @@
 		if(debug)
 			selectState($("#AR"))
 
-		$(d).on('click','.backToMap',resetMap);
+		$(d).on('click','.backToMap, .closeMap',resetMap);
 		$(d).on('click','.pin',getPinDetails);
+		$('.pokerChip').parent().mouseenter(spinPokerChip)
+			.mouseleave(function(){spinChip = false;});
+		$('#feelingLucky').mouseenter(bounceCommentArrow)
+			.mouseleave(function(){bounceArrow = false;});
 		//$(d).on('click','.video',openVideo);
 		//console.log(document.getElementById("IA").getBoundingClientRect());
 
@@ -187,6 +194,7 @@
 				}
 			});
 			t.to($('#river, .pin.red'), .5, {opacity:0, display:'none'});
+			t.to($('.closeMap'),0,{display:'block'});
 			$('.state').each(function(){
 				if ($(this).attr('data-active') == 0){
 					$(this).css('z-index',10);
@@ -242,7 +250,8 @@
 					'data-pinid':counter,
 					'data-state':state.abbrev,
 					'data-x':$(this)[0].x,
-					'data-y':$(this)[0].y
+					'data-y':$(this)[0].y,
+					'data-pinname': $(this)[0].name.replace(/ /g,"").replace(/'/g,"").toLowerCase()
 					})
 				.append("<img src='images/pin.png' />");
 			
@@ -293,7 +302,7 @@
 				$('.photo',$elem).hide();
 			}
 			
-			$('.share a', $elem).attr('href',data.url);
+			$('.share a', $elem).attr({'href':data.url,'target':'_blank'});
 			if (data.thumb == ""){
 				$(".thumb",$elem).hide();
 			}else{
@@ -347,16 +356,20 @@
 				this.clear();
 			},
 			onComplete:function(){
-				if(!mobile){
+				if(!mobile && !deepLink){
 					pinArr[0].trigger('click');
 				}
+				deepLink = false;
 			}
 		});
 		var pinArr = [];
 		$.each($('.pin_' + currentState.state), function(){
 			pinArr.push($(this));
 		})
-		pinArr[0].addClass('active');
+		if (!deepLink){
+			$('.pin').removeClass('active');
+			pinArr[0].addClass('active');
+		}
 		//if (!debug)
 			pinTl.staggerFrom(pinArr,.5,{top:-100},.1).to($(this),.5,{alpha:1},0.5)
 	}
@@ -373,8 +386,10 @@
 		var state = pin.attr('data-state');
 		var id = pin.attr('data-pinid');
 		var panel = $('#panel_' + state + '_' + id);
+		//deepLink = false;
 		if (mobile){
 			$("body").scrollTo(panel,600);
+			deepLink = false;
 			return;
 		}
 		if (details){
@@ -390,6 +405,7 @@
 	}
 
 	function showDetailsPanel(panel){
+		//deepLink = false;
 		if(mobile) return;
 		hideAllDetails();
 		panel.css('visibility','visible');
@@ -398,6 +414,57 @@
 
 	function hideAllDetails(){
 		$('.panel').css('visibility','hidden');
+	}
+
+	function spinPokerChip(){
+		spinChip = true;
+		var chipTl = new TimelineLite({
+			onComplete:function(){
+				if (spinChip){
+					spinPokerChip();
+				}
+			}
+		});
+
+		chipTl.to($('.pokerChip'),1,{scaleX:-1,ease:Linear.easeNone});
+		chipTl.to($('.pokerChip'),1,{scaleX:1,ease:Linear.easeNone});
+	}
+
+	function bounceCommentArrow(){
+		bounceArrow = true;
+		var arrowTl = new TimelineLite({
+			onComplete:function(){
+				if (bounceArrow){
+					bounceCommentArrow();
+				}
+			}
+		});
+
+		arrowTl.to($('.comments-arrow'),.2,{top:"-=5",ease:Linear.easeNone});
+		arrowTl.to($('.comments-arrow'),.2,{top:"+=5",ease:Linear.easeNone});
+	}
+
+	function getDeepLink(){
+		var url = document.location.toString();
+		if (url.match('#')){
+			return url.split('#')[1];
+		}
+		else{
+			return null;
+		}
+	}
+
+	function goToDeepLink(){
+		var dl = getDeepLink();
+		var pin = $('.pin[data-pinname="' + dl.toLowerCase() + '"');
+		if (dl === null && !pin.length) return;
+		deepLink = true;
+
+		
+		var state = $('#' + pin.attr('data-state'));
+		state.trigger('click');
+		pin.trigger('click');
+
 	}
 
 	function resize() {
