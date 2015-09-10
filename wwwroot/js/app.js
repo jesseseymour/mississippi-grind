@@ -26,10 +26,24 @@
 
 		$(d).on('click','.backToMap, .closeMap',resetMap);
 		$(d).on('click','.pin',getPinDetails);
-		$('.pokerChip').parent().mouseenter(spinPokerChip)
-			.mouseleave(function(){spinChip = false;});
-		$('#feelingLucky').mouseenter(bounceCommentArrow)
-			.mouseleave(function(){bounceArrow = false;});
+		$('.watchTrailer').on('click',function(){
+			$.fancybox.open({
+				href: "http://www.youtube.com/embed/7p1MNB6TNQU?autoplay=1"
+			},
+			{
+				type: 'iframe',
+				padding: 4,
+				margin: 40
+			})
+		})
+		$('#feelingLucky').mouseenter(function(){
+			bounceCommentArrow();
+			spinPokerChip();
+			})
+			.mouseleave(function(){
+				bounceArrow = false;
+				spinChip = false;
+			});
 		//$(d).on('click','.video',openVideo);
 		//console.log(document.getElementById("IA").getBoundingClientRect());
 
@@ -139,11 +153,18 @@
 					var x = state.attr('data-x');
 					var y = state.attr('data-y');
 					var scale = state.attr('data-scale');
+					var yoffset = 100;
+					var xoffset = 0;
 					if (mobile){
 						switch (state.attr('id')){
 							case 'IL':
+								scale = 50;
+								yoffset = 70;
+								x = 30;
 							case 'MS':
 								scale = 50;
+								yoffset = 20;
+								x = 30;
 								break;
 							default:
 								scale = 80;
@@ -169,7 +190,7 @@
 						newTop = newTop + "%";
 					}else{
 						var logo = document.getElementById('logo').getBoundingClientRect();
-						newTop = logo.top + logo.height + 100 + document.body.scrollTop;
+						newTop = logo.top + logo.height + document.body.scrollTop + yoffset;
 					}
 					TweenMax.to(overlay,time,{width:scale + "%",left:newLeft + "%",top:newTop, svgOrigin: "0 0",onComplete:function(){
 						//loop through state data object to find correct set of location pins
@@ -241,6 +262,7 @@
 	function createPins(state){
 		var counter = 0;
 		var pins = state.pins;
+		var suits = ["club","spade","heart","diamond"];
 		$.each(pins, function(){
 			//create the actual pin element that will show on the map
 			var data = $(this)[0];
@@ -253,7 +275,7 @@
 					'data-y':$(this)[0].y,
 					'data-pinname': $(this)[0].name.replace(/ /g,"").replace(/'/g,"").toLowerCase()
 					})
-				.append("<img src='images/pin.png' />");
+				.append("<img src='images/" + suits[counter%4] + ".png' />");
 			
 			$('.container').append(pin);
 
@@ -292,7 +314,7 @@
 					var img = {href: 'images/locations/' + data.images[i]};
 					group.push(img)
 				}
-				$('.photo',$elem).on('click',function(){
+				$('.photo, .thumb',$elem).on('click',function(){
 					$.fancybox.open(group,{
 						padding: 0,
 						margin: [40, 100, 40, 100]
@@ -301,8 +323,10 @@
 			}else{
 				$('.photo',$elem).hide();
 			}
-			
-			$('.share a', $elem).attr({'href':data.url,'target':'_blank'});
+			console.log(window.location);
+			$('.link a', $elem).attr({'href':data.url,'target':'_blank'});
+			$('.fb a', $elem).attr({'href':'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(window.location.origin + '?l=' + pin.attr("data-pinname")),'target':'_blank'});
+			$('.twttr a', $elem).attr({'href':'https://www.twitter.com/home?status=' + encodeURIComponent(window.location.origin + '?l=' + pin.attr("data-pinname")),'target':'_blank'})
 			if (data.thumb == ""){
 				$(".thumb",$elem).hide();
 			}else{
@@ -426,8 +450,8 @@
 			}
 		});
 
-		chipTl.to($('.pokerChip'),1,{scaleX:-1,ease:Linear.easeNone});
-		chipTl.to($('.pokerChip'),1,{scaleX:1,ease:Linear.easeNone});
+		chipTl.to($('.pokerChip'),0.75,{scaleY:-1,ease:Linear.easeNone});
+		chipTl.to($('.pokerChip'),0.75,{scaleY:1,ease:Linear.easeNone});
 	}
 
 	function bounceCommentArrow(){
@@ -455,7 +479,8 @@
 	}
 
 	function goToDeepLink(){
-		var dl = getDeepLink();
+		var dl = getParameterByName('l');
+		if (dl === null) return;
 		var pin = $('.pin[data-pinname="' + dl.toLowerCase() + '"');
 		if (dl === null && !pin.length) return;
 		deepLink = true;
@@ -465,6 +490,13 @@
 		state.trigger('click');
 		pin.trigger('click');
 
+	}
+
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
 
 	function resize() {
