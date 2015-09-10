@@ -323,7 +323,6 @@
 			}else{
 				$('.photo',$elem).hide();
 			}
-			console.log(window.location);
 			$('.link a', $elem).attr({'href':data.url,'target':'_blank'});
 			$('.fb a', $elem).attr({'href':'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(window.location.origin + '?l=' + pin.attr("data-pinname")),'target':'_blank'});
 			$('.twttr a', $elem).attr({'href':'https://www.twitter.com/home?status=' + encodeURIComponent(window.location.origin + '?l=' + pin.attr("data-pinname")),'target':'_blank'})
@@ -480,7 +479,7 @@
 
 	function goToDeepLink(){
 		var dl = getParameterByName('l');
-		if (dl === null) return;
+		if (dl === null || dl == "") return;
 		var pin = $('.pin[data-pinname="' + dl.toLowerCase() + '"');
 		if (dl === null && !pin.length) return;
 		deepLink = true;
