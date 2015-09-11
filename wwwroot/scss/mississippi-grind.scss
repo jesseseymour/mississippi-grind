@@ -427,6 +427,7 @@ span.pixel{
 	position: relative;
 	width: auto;
 	display: inline-block;
+	z-index: 16;
 	a{
 		font-size: 14px;
 		color: $yellow;

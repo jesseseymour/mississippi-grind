@@ -241,7 +241,8 @@
 		}
 	}
 
-	function resetMap(){
+	function resetMap(){ 
+		console.log("resetMap");
 		$(".panel").show();
 		if (mobile){
 			$("body").scrollTo($("#svgMap"),600);
@@ -357,10 +358,10 @@
 
 		var newWidth = map.width * 0.466;
 		var newHeight = newWidth * 2.44505907782121;
-
+		var newLeft = map.left + ( map.width * 0.2849869862426 ) - document.getElementById('container').getBoundingClientRect().left;
 		document.getElementById('river').style.width = newWidth + "px";
 		document.getElementById('river').style.height = newHeight + "px";
-		document.getElementById('river').style.left = map.left + ( map.width * 0.2849869862426 ) - parseFloat($('.container').css('margin-left')) + "px";
+		document.getElementById('river').style.left =newLeft + "px";
 		document.getElementById('river').style.top = map.top - ( map.height * 0.122 ) + document.body.scrollTop + "px";
 
 
@@ -376,7 +377,7 @@
 		$.each($('.pin_' + currentState.state), function(){
 			var percX = width * $(this).attr('data-x');
 			var percY = height * $(this).attr('data-y');
-			var newLeft = offset.left + percX - ($(this).width() / 2) - parseFloat($('.container').css('margin-left'));
+			var newLeft = offset.left + percX - ($(this).width() / 2) - document.getElementById('container').getBoundingClientRect().left;
 			var newTop = offset.top + document.getElementById("container").scrollTop + percY - $(this).height();
 
 			$(this).css({
@@ -575,6 +576,7 @@
 	w.onresize = function(){
 		resize();
 	}
+	w.addEventListener('orientationchange',resetMap)
 	
 	$.extend($.fancybox.defaults.tpl, {
 		wrap: '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div><div class="logo"><div class="dice"><img class="die1" src="images/die-1.png" alt="" /><img class="die2" src="images/die-2.png" alt="" /></div><img src="images/mississippi-grind-we-cant-lose.png" alt="Mississippi Grind. We Can\'t Lose" /></div>'
