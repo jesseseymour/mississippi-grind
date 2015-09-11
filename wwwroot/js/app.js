@@ -376,7 +376,7 @@
 		$.each($('.pin_' + currentState.state), function(){
 			var percX = width * $(this).attr('data-x');
 			var percY = height * $(this).attr('data-y');
-			var newLeft = offset.left + percX - ($(this).width() / 2);
+			var newLeft = offset.left + percX - ($(this).width() / 2) - parseFloat($('.container').css('margin-left'));
 			var newTop = offset.top + document.getElementById("container").scrollTop + percY - $(this).height();
 
 			$(this).css({
