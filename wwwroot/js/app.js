@@ -12,7 +12,9 @@
 	var spinChip = false;
 	var bounceArrow = false;
 	var deepLink = false;
-
+	var twitterText = encodeURIComponent("Head down the Mississippi River and see the sights with the stars of #MississippiGrind");
+	var login = "jesseseymour";
+	var api_key = "R_176c4bf0452d433eb552ea16f469d6e3";
 	var debug = false;
 
 	var init = function(){
@@ -37,13 +39,16 @@
 			})
 		})
 		$('#feelingLucky').mouseenter(function(){
-			bounceCommentArrow();
+			//bounceCommentArrow();
 			spinPokerChip();
 			})
 			.mouseleave(function(){
-				bounceArrow = false;
+				//bounceArrow = false;
 				spinChip = false;
 			});
+		$(".comments-arrow").on("click",function(){
+			$("body").scrollTo('100px',300);
+		})
 		//$(d).on('click','.video',openVideo);
 		//console.log(document.getElementById("IA").getBoundingClientRect());
 
@@ -94,7 +99,8 @@
 		var river = document.getElementById('riverPath'), length;
 		var riverObj = {
 			length:0,
-			pathLength:river.getTotalLength() - 95
+			//pathLength:river.getTotalLength() - 95
+			pathLength: 1300.1239013671875
 		};
 		tl.to(riverObj, 3, {
 			length:riverObj.pathLength, 
@@ -325,7 +331,14 @@
 			}
 			$('.link a', $elem).attr({'href':data.url,'target':'_blank'});
 			$('.fb a', $elem).attr({'href':'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(window.location.origin + '?l=' + pin.attr("data-pinname")),'target':'_blank'});
-			$('.twttr a', $elem).attr({'href':'https://www.twitter.com/home?status=' + encodeURIComponent(window.location.origin + '?l=' + pin.attr("data-pinname")),'target':'_blank'})
+			
+			var long_url = window.location.origin + '?l=' + pin.attr("data-pinname");
+			//var long_url = "http://google.com";
+			get_short_url(long_url, login, api_key, function(short_url) {
+    			$('.twttr a', $elem).attr({'href':'https://www.twitter.com/share?text='+twitterText+'&url=' + short_url,'target':'_blank'})
+			});
+
+			
 			if (data.thumb == ""){
 				$(".thumb",$elem).hide();
 			}else{
@@ -345,10 +358,10 @@
 		var newWidth = map.width * 0.466;
 		var newHeight = newWidth * 2.44505907782121;
 
-		document.getElementById('river').style.width = newWidth;
-		document.getElementById('river').style.height = newHeight;
-		document.getElementById('river').style.left = map.left + ( map.width * 0.2849869862426 );
-		document.getElementById('river').style.top = map.top - ( map.height * 0.122 ) + document.body.scrollTop;
+		document.getElementById('river').style.width = newWidth + "px";
+		document.getElementById('river').style.height = newHeight + "px";
+		document.getElementById('river').style.left = map.left + ( map.width * 0.2849869862426 ) - parseFloat($('.container').css('margin-left')) + "px";
+		document.getElementById('river').style.top = map.top - ( map.height * 0.122 ) + document.body.scrollTop + "px";
 
 
 		
@@ -449,8 +462,8 @@
 			}
 		});
 
-		chipTl.to($('.pokerChip'),0.75,{scaleY:-1,ease:Linear.easeNone});
-		chipTl.to($('.pokerChip'),0.75,{scaleY:1,ease:Linear.easeNone});
+		chipTl.to($('.pokerChip'),0.25,{scaleY:-1,ease:Linear.easeNone});
+		chipTl.to($('.pokerChip'),0.25,{scaleY:1,ease:Linear.easeNone});
 	}
 
 	function bounceCommentArrow(){
@@ -525,7 +538,10 @@
 		if(selected){
 			positionPins();
 		}
-
+		var cHeight = w.innerHeight - 29;
+		$("#container").height(cHeight);
+		$("#svgMap").height($("#svgMap").width()*1.14492080419237)
+		
 		/*if (!mobile){
 			$("#logo").css('margin-top',$("#logo").height() / 2 * -1);
 		}else{
@@ -535,6 +551,24 @@
 		//console.log(document.getElementById('svgMap').getBoundingClientRect());
 		positionRiver();
 	}
+
+	function get_short_url(long_url, login, api_key, func)
+	{
+	    $.getJSON(
+	        "http://api.bitly.com/v3/shorten?callback=?", 
+	        { 
+	            "format": "json",
+	            "apiKey": api_key,
+	            "login": login,
+	            "longUrl": long_url
+	        },
+	        function(response)
+	        {
+	            func(response.data.url);
+	        }
+	    );
+	}
+	
 
 	
 	
@@ -547,5 +581,6 @@
 	});
 	$.fancybox.defaults.nextEffect = "none";
 	$.fancybox.defaults.prevEffect = "none";
+	$.fancybox.defaults.closeBtn = false;
 	$(d).ready(init);
 }(jQuery, window, document));
