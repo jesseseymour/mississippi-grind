@@ -242,13 +242,18 @@
 	}
 
 	function resetMap(){ 
-		console.log("resetMap");
 		$(".panel").show();
 		if (mobile){
 			$("body").scrollTo($("#svgMap"),600);
 			$(".panel").hide();
+		}else{
+			$("body").scrollTo($("#svgMap"),0);
 		}
-
+		$("#" + currentState.state).attr('data-active','0');
+		if (!mobile) TweenLite.to($('#details'),.5,{right:'-100%'});
+		selected = false;
+		details = false;
+		if (currentState.state === undefined) return;
 		var path = document.getElementById(currentState.state);
 		var width = path.getBoundingClientRect().width;
 		var height = path.getBoundingClientRect().height;
@@ -259,10 +264,8 @@
 			t.reverse();
 		}});
 		
-		$("#" + currentState.state).attr('data-active','0');
-		if (!mobile) TweenLite.to($('#details'),.5,{right:'-100%'});
-		selected = false;
-		details = false;
+		
+		//resize();
 		
 	}
 
@@ -513,7 +516,6 @@
 	}
 
 	function resize() {
-		
 		var isMobile = mobile;
 
 		if ($('.pixel').css('visibility') == 'hidden'){
@@ -524,7 +526,9 @@
 			mobile = true;
 		}
 		if (isMobile != mobile ){
-			if(count>0) resetMap();
+			if(count>0) {
+				setTimeout(resetMap,100);
+			}
 			count++;
 
 		}
@@ -551,6 +555,7 @@
 
 		//console.log(document.getElementById('svgMap').getBoundingClientRect());
 		positionRiver();
+		
 	}
 
 	function get_short_url(long_url, login, api_key, func)
@@ -575,8 +580,12 @@
 	
 	w.onresize = function(){
 		resize();
+		//setTimeout(resetMap,1000);
 	}
-	w.addEventListener('orientationchange',resetMap)
+	w.addEventListener('orientationchange',function(){
+		resetMap();
+		//setTimeout(resize,1000);
+	})
 	
 	$.extend($.fancybox.defaults.tpl, {
 		wrap: '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div><div class="logo"><div class="dice"><img class="die1" src="images/die-1.png" alt="" /><img class="die2" src="images/die-2.png" alt="" /></div><img src="images/mississippi-grind-we-cant-lose.png" alt="Mississippi Grind. We Can\'t Lose" /></div>'
