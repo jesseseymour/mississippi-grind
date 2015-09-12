@@ -247,7 +247,7 @@
 			$("body").scrollTo($("#svgMap"),600);
 			$(".panel").hide();
 		}else{
-			$("body").scrollTo($("#svgMap"),0);
+			$("body").scrollTo(0,0);
 		}
 		$("#" + currentState.state).attr('data-active','0');
 		if (!mobile) TweenLite.to($('#details'),.5,{right:'-100%'});
