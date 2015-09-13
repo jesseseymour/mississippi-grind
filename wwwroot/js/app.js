@@ -15,7 +15,6 @@
 	var twitterText = encodeURIComponent("Head down the Mississippi River and see the sights with the stars of #MississippiGrind");
 	var login = "jesseseymour";
 	var api_key = "R_176c4bf0452d433eb552ea16f469d6e3";
-	var debug = false;
 
 	var init = function(){
 		
@@ -23,8 +22,6 @@
 			var stateName = $(this).attr('id');
 			selectState($("#" + stateName));
 		})
-		if(debug)
-			selectState($("#AR"))
 
 		$(d).on('click','.backToMap, .closeMap',resetMap);
 		$(d).on('click','.pin',getPinDetails);
@@ -39,11 +36,9 @@
 			})
 		})
 		$('#feelingLucky').mouseenter(function(){
-			//bounceCommentArrow();
 			spinPokerChip();
 			})
 			.mouseleave(function(){
-				//bounceArrow = false;
 				spinChip = false;
 			});
 		$(".comments-arrow").on("click",function(){
@@ -54,8 +49,7 @@
 
 		//set states to scale 0 and transformOrigin to center
 		TweenMax.set($('.state'),{transformOrigin: "50% 50% 0"});
-		if(!debug)
-			TweenMax.to($('.state'),0,{scale:0});
+		TweenMax.to($('.state'),0,{scale:0});
 		//startAnimation();
 
 		resize();
@@ -80,8 +74,6 @@
 				}
 				i++;
 			})
-			
-			if (!debug)
 				startAnimation();
 		})
 	}
@@ -185,7 +177,6 @@
 					//now the state overlay img is animated into place
 					//and once complete, we determine where the pins should animate to
 					var time = 0;
-					if (!debug)
 						time = 0.2;
 					var svgOffset = $(".svgContainer").offset();
 					var svgWidth = $(".svgContainer").width();
@@ -226,7 +217,6 @@
 				if ($(this).attr('data-active') == 0){
 					$(this).css('z-index',10);
 					var time = 0;
-					if (!debug)
 						time = 0.3;
 					t.to($(this),time,{scale:0, ease: Back.easeIn}, 0);
 					//t.to($(this),0,{display:'none'});
@@ -235,10 +225,7 @@
 
 			
 			
-		} else {
-			
-			//selected = false;
-		}
+		} 
 	}
 
 	function resetMap(){ 
@@ -410,7 +397,6 @@
 			$('.pin').removeClass('active');
 			pinArr[0].addClass('active');
 		}
-		//if (!debug)
 			pinTl.staggerFrom(pinArr,.5,{top:-100},.1).to($(this),.5,{alpha:1},0.5)
 	}
 
