@@ -540,6 +540,9 @@ span.pixel{
 		}
 	}
 }
+.fancybox-mobile .logo{
+	display: none !important;
+}
 @media #{$mobilebreakpoint}{
 .fancybox-type-iframe{
 	.fancybox-inner{
