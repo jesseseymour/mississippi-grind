@@ -5,9 +5,9 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	reload = browserSync.reload,
 	uglify = require('gulp-uglify'),
-	minifyCss = require('gulp-minify-css'),
-	imagemin = require('gulp-imagemin'),
-	pngquant = require('imagemin-pngquant');
+	minifyCss = require('gulp-minify-css');
+	//imagemin = require('gulp-imagemin'),
+	//pngquant = require('imagemin-pngquant');
 	
 
 gulp.task('sass', function() {
